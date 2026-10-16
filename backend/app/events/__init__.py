@@ -1,0 +1,1 @@
+"""SSE event bus for live workflow visualization."""

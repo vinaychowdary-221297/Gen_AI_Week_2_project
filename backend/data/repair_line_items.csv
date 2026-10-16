@@ -1,0 +1,59 @@
+line_id,claim_id,description,part_number,labor_hours,labor_rate,parts_cost,total
+LN-0001,CLM-1001,Rear bumper cover,RB-100,2.5,85.0,420.0,632.5
+LN-0002,CLM-1001,Rear bumper reinforcement,RB-110,1.5,85.0,180.0,307.5
+LN-0003,CLM-1001,Hatch panel blend,HP-200,3.0,85.0,0.0,255.0
+LN-0004,CLM-1001,Exhaust tip,EX-55,0.8,85.0,95.0,163.0
+LN-0005,CLM-1001,Paint materials,PM-01,0.0,0.0,275.0,275.0
+LN-0006,CLM-1001,ADAS calibration,AD-90,1.5,140.0,0.0,210.0
+LN-0007,CLM-1002,Paint materials,PM-01,0.0,0.0,275.0,275.0
+LN-0008,CLM-1002,Rear bumper reinforcement,RB-110,1.5,85.0,180.0,307.5
+LN-0009,CLM-1002,Exhaust tip,EX-55,0.8,85.0,95.0,163.0
+LN-0010,CLM-1002,Door shell,DR-22,5.0,85.0,650.0,1075.0
+LN-0011,CLM-1002,ADAS calibration,AD-90,1.5,140.0,0.0,210.0
+LN-0012,CLM-1003,Side mirror assembly,MR-07,1.0,85.0,210.0,295.0
+LN-0013,CLM-1003,Hood panel,HD-10,4.0,85.0,520.0,860.0
+LN-0014,CLM-1003,Front bumper cover,FB-100,2.8,85.0,390.0,628.0
+LN-0015,CLM-1004,Hatch panel blend,HP-200,3.0,85.0,0.0,255.0
+LN-0016,CLM-1004,Paint materials,PM-01,0.0,0.0,275.0,275.0
+LN-0017,CLM-1004,Misc supplies,MS-01,0.0,0.0,65.0,65.0
+LN-0018,CLM-1004,Exhaust tip,EX-55,0.8,85.0,95.0,163.0
+LN-0019,CLM-1004,Windshield OEM,GL-01,2.0,95.0,480.0,670.0
+LN-0020,CLM-1005,ADAS calibration,AD-90,1.5,140.0,0.0,210.0
+LN-0021,CLM-1005,ADAS calibration,AD-90,1.5,140.0,0.0,210.0
+LN-0022,CLM-1005,Rear bumper cover,RB-100,2.5,85.0,420.0,632.5
+LN-0023,CLM-1005,Sensor suite module,SS-33,2.0,140.0,890.0,1170.0
+LN-0024,CLM-1005,Labor - body,LB-01,6.0,85.0,0.0,510.0
+LN-0025,CLM-1005,Labor - paint,LP-01,5.0,85.0,0.0,425.0
+LN-0026,CLM-1006,ADAS calibration,AD-90,1.5,140.0,0.0,210.0
+LN-0027,CLM-1006,Exhaust tip,EX-55,0.8,85.0,95.0,163.0
+LN-0028,CLM-1006,Hatch panel blend,HP-200,3.0,85.0,0.0,255.0
+LN-0029,CLM-1006,Windshield OEM,GL-01,2.0,95.0,480.0,670.0
+LN-0030,CLM-1006,Hood panel,HD-10,4.0,85.0,520.0,860.0
+LN-0031,CLM-1007,Labor - body,LB-01,6.0,85.0,0.0,510.0
+LN-0032,CLM-1007,Rear bumper cover,RB-100,2.5,85.0,420.0,632.5
+LN-0033,CLM-1008,Hatch panel blend,HP-200,3.0,85.0,0.0,255.0
+LN-0034,CLM-1008,Side mirror assembly,MR-07,1.0,85.0,210.0,295.0
+LN-0035,CLM-1009,Labor - body,LB-01,6.0,85.0,0.0,510.0
+LN-0036,CLM-1009,Side mirror assembly,MR-07,1.0,85.0,210.0,295.0
+LN-0037,CLM-1009,Front bumper cover,FB-100,2.8,85.0,390.0,628.0
+LN-0038,CLM-1010,Front bumper cover,FB-100,2.8,85.0,390.0,628.0
+LN-0039,CLM-1010,Misc supplies,MS-01,0.0,0.0,65.0,65.0
+LN-0040,CLM-1011,Windshield OEM,GL-01,2.0,95.0,480.0,670.0
+LN-0041,CLM-1011,Paint materials,PM-01,0.0,0.0,275.0,275.0
+LN-0042,CLM-1011,Misc supplies,MS-01,0.0,0.0,65.0,65.0
+LN-0043,CLM-1011,Rear bumper cover,RB-100,2.5,85.0,420.0,632.5
+LN-0044,CLM-1011,Side mirror assembly,MR-07,1.0,85.0,210.0,295.0
+LN-0045,CLM-1012,Side mirror assembly,MR-07,1.0,85.0,210.0,295.0
+LN-0046,CLM-1012,Windshield OEM,GL-01,2.0,95.0,480.0,670.0
+LN-0047,CLM-1013,Labor - body,LB-01,6.0,85.0,0.0,510.0
+LN-0048,CLM-1013,Side mirror assembly,MR-07,1.0,85.0,210.0,295.0
+LN-0049,CLM-1013,ADAS calibration,AD-90,1.5,140.0,0.0,210.0
+LN-0050,CLM-1013,Rear bumper reinforcement,RB-110,1.5,85.0,180.0,307.5
+LN-0051,CLM-1014,Front bumper cover,FB-100,2.8,85.0,390.0,628.0
+LN-0052,CLM-1014,Hatch panel blend,HP-200,3.0,85.0,0.0,255.0
+LN-0053,CLM-1014,Hood panel,HD-10,4.0,85.0,520.0,860.0
+LN-0054,CLM-1014,Rear bumper cover,RB-100,2.5,85.0,420.0,632.5
+LN-0055,CLM-1015,Windshield OEM,GL-01,2.0,95.0,480.0,670.0
+LN-0056,CLM-1015,Labor - body,LB-01,6.0,85.0,0.0,510.0
+LN-0057,CLM-1015,Hatch panel blend,HP-200,3.0,85.0,0.0,255.0
+LN-0058,CLM-1015,Misc supplies,MS-01,0.0,0.0,65.0,65.0

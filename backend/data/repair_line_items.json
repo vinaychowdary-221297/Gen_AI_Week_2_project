@@ -1,0 +1,582 @@
+[
+  {
+    "line_id": "LN-0001",
+    "claim_id": "CLM-1001",
+    "description": "Rear bumper cover",
+    "part_number": "RB-100",
+    "labor_hours": 2.5,
+    "labor_rate": 85.0,
+    "parts_cost": 420.0,
+    "total": 632.5
+  },
+  {
+    "line_id": "LN-0002",
+    "claim_id": "CLM-1001",
+    "description": "Rear bumper reinforcement",
+    "part_number": "RB-110",
+    "labor_hours": 1.5,
+    "labor_rate": 85.0,
+    "parts_cost": 180.0,
+    "total": 307.5
+  },
+  {
+    "line_id": "LN-0003",
+    "claim_id": "CLM-1001",
+    "description": "Hatch panel blend",
+    "part_number": "HP-200",
+    "labor_hours": 3.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 255.0
+  },
+  {
+    "line_id": "LN-0004",
+    "claim_id": "CLM-1001",
+    "description": "Exhaust tip",
+    "part_number": "EX-55",
+    "labor_hours": 0.8,
+    "labor_rate": 85.0,
+    "parts_cost": 95.0,
+    "total": 163.0
+  },
+  {
+    "line_id": "LN-0005",
+    "claim_id": "CLM-1001",
+    "description": "Paint materials",
+    "part_number": "PM-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 275.0,
+    "total": 275.0
+  },
+  {
+    "line_id": "LN-0006",
+    "claim_id": "CLM-1001",
+    "description": "ADAS calibration",
+    "part_number": "AD-90",
+    "labor_hours": 1.5,
+    "labor_rate": 140.0,
+    "parts_cost": 0.0,
+    "total": 210.0
+  },
+  {
+    "line_id": "LN-0007",
+    "claim_id": "CLM-1002",
+    "description": "Paint materials",
+    "part_number": "PM-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 275.0,
+    "total": 275.0
+  },
+  {
+    "line_id": "LN-0008",
+    "claim_id": "CLM-1002",
+    "description": "Rear bumper reinforcement",
+    "part_number": "RB-110",
+    "labor_hours": 1.5,
+    "labor_rate": 85.0,
+    "parts_cost": 180.0,
+    "total": 307.5
+  },
+  {
+    "line_id": "LN-0009",
+    "claim_id": "CLM-1002",
+    "description": "Exhaust tip",
+    "part_number": "EX-55",
+    "labor_hours": 0.8,
+    "labor_rate": 85.0,
+    "parts_cost": 95.0,
+    "total": 163.0
+  },
+  {
+    "line_id": "LN-0010",
+    "claim_id": "CLM-1002",
+    "description": "Door shell",
+    "part_number": "DR-22",
+    "labor_hours": 5.0,
+    "labor_rate": 85.0,
+    "parts_cost": 650.0,
+    "total": 1075.0
+  },
+  {
+    "line_id": "LN-0011",
+    "claim_id": "CLM-1002",
+    "description": "ADAS calibration",
+    "part_number": "AD-90",
+    "labor_hours": 1.5,
+    "labor_rate": 140.0,
+    "parts_cost": 0.0,
+    "total": 210.0
+  },
+  {
+    "line_id": "LN-0012",
+    "claim_id": "CLM-1003",
+    "description": "Side mirror assembly",
+    "part_number": "MR-07",
+    "labor_hours": 1.0,
+    "labor_rate": 85.0,
+    "parts_cost": 210.0,
+    "total": 295.0
+  },
+  {
+    "line_id": "LN-0013",
+    "claim_id": "CLM-1003",
+    "description": "Hood panel",
+    "part_number": "HD-10",
+    "labor_hours": 4.0,
+    "labor_rate": 85.0,
+    "parts_cost": 520.0,
+    "total": 860.0
+  },
+  {
+    "line_id": "LN-0014",
+    "claim_id": "CLM-1003",
+    "description": "Front bumper cover",
+    "part_number": "FB-100",
+    "labor_hours": 2.8,
+    "labor_rate": 85.0,
+    "parts_cost": 390.0,
+    "total": 628.0
+  },
+  {
+    "line_id": "LN-0015",
+    "claim_id": "CLM-1004",
+    "description": "Hatch panel blend",
+    "part_number": "HP-200",
+    "labor_hours": 3.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 255.0
+  },
+  {
+    "line_id": "LN-0016",
+    "claim_id": "CLM-1004",
+    "description": "Paint materials",
+    "part_number": "PM-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 275.0,
+    "total": 275.0
+  },
+  {
+    "line_id": "LN-0017",
+    "claim_id": "CLM-1004",
+    "description": "Misc supplies",
+    "part_number": "MS-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 65.0,
+    "total": 65.0
+  },
+  {
+    "line_id": "LN-0018",
+    "claim_id": "CLM-1004",
+    "description": "Exhaust tip",
+    "part_number": "EX-55",
+    "labor_hours": 0.8,
+    "labor_rate": 85.0,
+    "parts_cost": 95.0,
+    "total": 163.0
+  },
+  {
+    "line_id": "LN-0019",
+    "claim_id": "CLM-1004",
+    "description": "Windshield OEM",
+    "part_number": "GL-01",
+    "labor_hours": 2.0,
+    "labor_rate": 95.0,
+    "parts_cost": 480.0,
+    "total": 670.0
+  },
+  {
+    "line_id": "LN-0020",
+    "claim_id": "CLM-1005",
+    "description": "ADAS calibration",
+    "part_number": "AD-90",
+    "labor_hours": 1.5,
+    "labor_rate": 140.0,
+    "parts_cost": 0.0,
+    "total": 210.0
+  },
+  {
+    "line_id": "LN-0021",
+    "claim_id": "CLM-1005",
+    "description": "ADAS calibration",
+    "part_number": "AD-90",
+    "labor_hours": 1.5,
+    "labor_rate": 140.0,
+    "parts_cost": 0.0,
+    "total": 210.0
+  },
+  {
+    "line_id": "LN-0022",
+    "claim_id": "CLM-1005",
+    "description": "Rear bumper cover",
+    "part_number": "RB-100",
+    "labor_hours": 2.5,
+    "labor_rate": 85.0,
+    "parts_cost": 420.0,
+    "total": 632.5
+  },
+  {
+    "line_id": "LN-0023",
+    "claim_id": "CLM-1005",
+    "description": "Sensor suite module",
+    "part_number": "SS-33",
+    "labor_hours": 2.0,
+    "labor_rate": 140.0,
+    "parts_cost": 890.0,
+    "total": 1170.0
+  },
+  {
+    "line_id": "LN-0024",
+    "claim_id": "CLM-1005",
+    "description": "Labor - body",
+    "part_number": "LB-01",
+    "labor_hours": 6.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 510.0
+  },
+  {
+    "line_id": "LN-0025",
+    "claim_id": "CLM-1005",
+    "description": "Labor - paint",
+    "part_number": "LP-01",
+    "labor_hours": 5.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 425.0
+  },
+  {
+    "line_id": "LN-0026",
+    "claim_id": "CLM-1006",
+    "description": "ADAS calibration",
+    "part_number": "AD-90",
+    "labor_hours": 1.5,
+    "labor_rate": 140.0,
+    "parts_cost": 0.0,
+    "total": 210.0
+  },
+  {
+    "line_id": "LN-0027",
+    "claim_id": "CLM-1006",
+    "description": "Exhaust tip",
+    "part_number": "EX-55",
+    "labor_hours": 0.8,
+    "labor_rate": 85.0,
+    "parts_cost": 95.0,
+    "total": 163.0
+  },
+  {
+    "line_id": "LN-0028",
+    "claim_id": "CLM-1006",
+    "description": "Hatch panel blend",
+    "part_number": "HP-200",
+    "labor_hours": 3.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 255.0
+  },
+  {
+    "line_id": "LN-0029",
+    "claim_id": "CLM-1006",
+    "description": "Windshield OEM",
+    "part_number": "GL-01",
+    "labor_hours": 2.0,
+    "labor_rate": 95.0,
+    "parts_cost": 480.0,
+    "total": 670.0
+  },
+  {
+    "line_id": "LN-0030",
+    "claim_id": "CLM-1006",
+    "description": "Hood panel",
+    "part_number": "HD-10",
+    "labor_hours": 4.0,
+    "labor_rate": 85.0,
+    "parts_cost": 520.0,
+    "total": 860.0
+  },
+  {
+    "line_id": "LN-0031",
+    "claim_id": "CLM-1007",
+    "description": "Labor - body",
+    "part_number": "LB-01",
+    "labor_hours": 6.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 510.0
+  },
+  {
+    "line_id": "LN-0032",
+    "claim_id": "CLM-1007",
+    "description": "Rear bumper cover",
+    "part_number": "RB-100",
+    "labor_hours": 2.5,
+    "labor_rate": 85.0,
+    "parts_cost": 420.0,
+    "total": 632.5
+  },
+  {
+    "line_id": "LN-0033",
+    "claim_id": "CLM-1008",
+    "description": "Hatch panel blend",
+    "part_number": "HP-200",
+    "labor_hours": 3.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 255.0
+  },
+  {
+    "line_id": "LN-0034",
+    "claim_id": "CLM-1008",
+    "description": "Side mirror assembly",
+    "part_number": "MR-07",
+    "labor_hours": 1.0,
+    "labor_rate": 85.0,
+    "parts_cost": 210.0,
+    "total": 295.0
+  },
+  {
+    "line_id": "LN-0035",
+    "claim_id": "CLM-1009",
+    "description": "Labor - body",
+    "part_number": "LB-01",
+    "labor_hours": 6.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 510.0
+  },
+  {
+    "line_id": "LN-0036",
+    "claim_id": "CLM-1009",
+    "description": "Side mirror assembly",
+    "part_number": "MR-07",
+    "labor_hours": 1.0,
+    "labor_rate": 85.0,
+    "parts_cost": 210.0,
+    "total": 295.0
+  },
+  {
+    "line_id": "LN-0037",
+    "claim_id": "CLM-1009",
+    "description": "Front bumper cover",
+    "part_number": "FB-100",
+    "labor_hours": 2.8,
+    "labor_rate": 85.0,
+    "parts_cost": 390.0,
+    "total": 628.0
+  },
+  {
+    "line_id": "LN-0038",
+    "claim_id": "CLM-1010",
+    "description": "Front bumper cover",
+    "part_number": "FB-100",
+    "labor_hours": 2.8,
+    "labor_rate": 85.0,
+    "parts_cost": 390.0,
+    "total": 628.0
+  },
+  {
+    "line_id": "LN-0039",
+    "claim_id": "CLM-1010",
+    "description": "Misc supplies",
+    "part_number": "MS-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 65.0,
+    "total": 65.0
+  },
+  {
+    "line_id": "LN-0040",
+    "claim_id": "CLM-1011",
+    "description": "Windshield OEM",
+    "part_number": "GL-01",
+    "labor_hours": 2.0,
+    "labor_rate": 95.0,
+    "parts_cost": 480.0,
+    "total": 670.0
+  },
+  {
+    "line_id": "LN-0041",
+    "claim_id": "CLM-1011",
+    "description": "Paint materials",
+    "part_number": "PM-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 275.0,
+    "total": 275.0
+  },
+  {
+    "line_id": "LN-0042",
+    "claim_id": "CLM-1011",
+    "description": "Misc supplies",
+    "part_number": "MS-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 65.0,
+    "total": 65.0
+  },
+  {
+    "line_id": "LN-0043",
+    "claim_id": "CLM-1011",
+    "description": "Rear bumper cover",
+    "part_number": "RB-100",
+    "labor_hours": 2.5,
+    "labor_rate": 85.0,
+    "parts_cost": 420.0,
+    "total": 632.5
+  },
+  {
+    "line_id": "LN-0044",
+    "claim_id": "CLM-1011",
+    "description": "Side mirror assembly",
+    "part_number": "MR-07",
+    "labor_hours": 1.0,
+    "labor_rate": 85.0,
+    "parts_cost": 210.0,
+    "total": 295.0
+  },
+  {
+    "line_id": "LN-0045",
+    "claim_id": "CLM-1012",
+    "description": "Side mirror assembly",
+    "part_number": "MR-07",
+    "labor_hours": 1.0,
+    "labor_rate": 85.0,
+    "parts_cost": 210.0,
+    "total": 295.0
+  },
+  {
+    "line_id": "LN-0046",
+    "claim_id": "CLM-1012",
+    "description": "Windshield OEM",
+    "part_number": "GL-01",
+    "labor_hours": 2.0,
+    "labor_rate": 95.0,
+    "parts_cost": 480.0,
+    "total": 670.0
+  },
+  {
+    "line_id": "LN-0047",
+    "claim_id": "CLM-1013",
+    "description": "Labor - body",
+    "part_number": "LB-01",
+    "labor_hours": 6.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 510.0
+  },
+  {
+    "line_id": "LN-0048",
+    "claim_id": "CLM-1013",
+    "description": "Side mirror assembly",
+    "part_number": "MR-07",
+    "labor_hours": 1.0,
+    "labor_rate": 85.0,
+    "parts_cost": 210.0,
+    "total": 295.0
+  },
+  {
+    "line_id": "LN-0049",
+    "claim_id": "CLM-1013",
+    "description": "ADAS calibration",
+    "part_number": "AD-90",
+    "labor_hours": 1.5,
+    "labor_rate": 140.0,
+    "parts_cost": 0.0,
+    "total": 210.0
+  },
+  {
+    "line_id": "LN-0050",
+    "claim_id": "CLM-1013",
+    "description": "Rear bumper reinforcement",
+    "part_number": "RB-110",
+    "labor_hours": 1.5,
+    "labor_rate": 85.0,
+    "parts_cost": 180.0,
+    "total": 307.5
+  },
+  {
+    "line_id": "LN-0051",
+    "claim_id": "CLM-1014",
+    "description": "Front bumper cover",
+    "part_number": "FB-100",
+    "labor_hours": 2.8,
+    "labor_rate": 85.0,
+    "parts_cost": 390.0,
+    "total": 628.0
+  },
+  {
+    "line_id": "LN-0052",
+    "claim_id": "CLM-1014",
+    "description": "Hatch panel blend",
+    "part_number": "HP-200",
+    "labor_hours": 3.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 255.0
+  },
+  {
+    "line_id": "LN-0053",
+    "claim_id": "CLM-1014",
+    "description": "Hood panel",
+    "part_number": "HD-10",
+    "labor_hours": 4.0,
+    "labor_rate": 85.0,
+    "parts_cost": 520.0,
+    "total": 860.0
+  },
+  {
+    "line_id": "LN-0054",
+    "claim_id": "CLM-1014",
+    "description": "Rear bumper cover",
+    "part_number": "RB-100",
+    "labor_hours": 2.5,
+    "labor_rate": 85.0,
+    "parts_cost": 420.0,
+    "total": 632.5
+  },
+  {
+    "line_id": "LN-0055",
+    "claim_id": "CLM-1015",
+    "description": "Windshield OEM",
+    "part_number": "GL-01",
+    "labor_hours": 2.0,
+    "labor_rate": 95.0,
+    "parts_cost": 480.0,
+    "total": 670.0
+  },
+  {
+    "line_id": "LN-0056",
+    "claim_id": "CLM-1015",
+    "description": "Labor - body",
+    "part_number": "LB-01",
+    "labor_hours": 6.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 510.0
+  },
+  {
+    "line_id": "LN-0057",
+    "claim_id": "CLM-1015",
+    "description": "Hatch panel blend",
+    "part_number": "HP-200",
+    "labor_hours": 3.0,
+    "labor_rate": 85.0,
+    "parts_cost": 0.0,
+    "total": 255.0
+  },
+  {
+    "line_id": "LN-0058",
+    "claim_id": "CLM-1015",
+    "description": "Misc supplies",
+    "part_number": "MS-01",
+    "labor_hours": 0.0,
+    "labor_rate": 0.0,
+    "parts_cost": 65.0,
+    "total": 65.0
+  }
+]

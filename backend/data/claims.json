@@ -1,0 +1,396 @@
+[
+  {
+    "claim_id": "CLM-1001",
+    "policy_id": "POL-5001",
+    "accident_date": "2026-08-15",
+    "accident_description": "Insured was stopped at a red light on Highway 183 when another vehicle rear-ended the 2024 Toyota RAV4 XSE. Rear bumper, hatch, and exhaust tip damaged. Airbags did not deploy. No injuries reported.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2024,
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "XSE",
+      "vin": "JTMB1RFV0R4123456",
+      "color": "Blueprint"
+    },
+    "reported_date": "2026-08-15",
+    "location": "Austin, TX",
+    "police_report_number": "APD-2026-081512",
+    "submitted_documents": [
+      "FNOL",
+      "Police Report",
+      "Repair Estimate",
+      "Photos",
+      "Driver License"
+    ],
+    "estimate_total": 4820.5,
+    "scenario_tag": "standard_collision",
+    "notes": "Demo scenario: active policy, collision listed, complete docs."
+  },
+  {
+    "claim_id": "CLM-1002",
+    "policy_id": "POL-5002",
+    "accident_date": "2026-04-02",
+    "accident_description": "Side-swipe in parking garage damaging driver door and mirror.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2021,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "EX",
+      "vin": "19XFC2F59ME123456",
+      "color": "Sonic Gray"
+    },
+    "reported_date": "2026-04-03",
+    "location": "San Jose, CA",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 2150.0,
+    "scenario_tag": "no_collision_coverage",
+    "notes": "Collision not listed on policy; comprehensive only."
+  },
+  {
+    "claim_id": "CLM-1003",
+    "policy_id": "POL-5004",
+    "accident_date": "2026-03-10",
+    "accident_description": "Hit deer on rural road; front bumper and grille damage.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2022,
+      "make": "Subaru",
+      "model": "Outback",
+      "trim": "Premium",
+      "vin": "4S4BTACC2N3123456",
+      "color": "Crystal White"
+    },
+    "reported_date": "2026-03-11",
+    "location": "Albany, NY",
+    "police_report_number": "NYSP-44219",
+    "submitted_documents": [
+      "FNOL",
+      "Police Report",
+      "Repair Estimate"
+    ],
+    "estimate_total": 3600.0,
+    "scenario_tag": "policy_expired",
+    "notes": "Loss date after policy expiration."
+  },
+  {
+    "claim_id": "CLM-1004",
+    "policy_id": "POL-5003",
+    "accident_date": "2026-07-01",
+    "accident_description": "Hail storm damaged roof, hood, and trunk lid.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2023,
+      "make": "Ford",
+      "model": "Escape",
+      "trim": "SE",
+      "vin": "1FMCU9G60PUA12345",
+      "color": "Oxford White"
+    },
+    "reported_date": "2026-07-02",
+    "location": "Tampa, FL",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate",
+      "Weather Report"
+    ],
+    "estimate_total": 5400.0,
+    "scenario_tag": "comprehensive_hail",
+    "notes": "Comprehensive claim; collision not implicated."
+  },
+  {
+    "claim_id": "CLM-1005",
+    "policy_id": "POL-5005",
+    "accident_date": "2026-09-05",
+    "accident_description": "Rear-end collision on I-90; bumper and sensor suite damage.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2025,
+      "make": "Tesla",
+      "model": "Model Y",
+      "trim": "Long Range",
+      "vin": "7SAYGDEE1PF123456",
+      "color": "Midnight Silver"
+    },
+    "reported_date": "2026-09-05",
+    "location": "Chicago, IL",
+    "police_report_number": "CPD-998211",
+    "submitted_documents": [
+      "FNOL",
+      "Police Report",
+      "Repair Estimate",
+      "Photos"
+    ],
+    "estimate_total": 8750.25,
+    "scenario_tag": "duplicate_line_items",
+    "notes": "Estimate contains potential duplicate ADAS calibration charge."
+  },
+  {
+    "claim_id": "CLM-1006",
+    "policy_id": "POL-5001",
+    "accident_date": "2026-05-20",
+    "accident_description": "Minor parking lot ding on rear quarter panel.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2024,
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "XSE",
+      "vin": "JTMB1RFV0R4123456",
+      "color": "Blueprint"
+    },
+    "reported_date": "2026-05-20",
+    "location": "Austin, TX",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 4764.45,
+    "scenario_tag": "standard_collision",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1007",
+    "policy_id": "POL-5001",
+    "accident_date": "2026-06-12",
+    "accident_description": "Glass crack from road debris on windshield.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2024,
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "XSE",
+      "vin": "JTMB1RFV0R4123456",
+      "color": "Blueprint"
+    },
+    "reported_date": "2026-06-12",
+    "location": "Austin, TX",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 955.07,
+    "scenario_tag": "glass",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1008",
+    "policy_id": "POL-5002",
+    "accident_date": "2026-01-18",
+    "accident_description": "Theft of catalytic converter overnight.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2021,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "EX",
+      "vin": "19XFC2F59ME123456",
+      "color": "Sonic Gray"
+    },
+    "reported_date": "2026-01-18",
+    "location": "San Jose, CA",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 2505.18,
+    "scenario_tag": "comprehensive_theft",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1009",
+    "policy_id": "POL-5003",
+    "accident_date": "2026-08-22",
+    "accident_description": "Flooding in underground garage soaked cabin floor.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2023,
+      "make": "Ford",
+      "model": "Escape",
+      "trim": "SE",
+      "vin": "1FMCU9G60PUA12345",
+      "color": "Oxford White"
+    },
+    "reported_date": "2026-08-22",
+    "location": "Miami, FL",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 2183.91,
+    "scenario_tag": "comprehensive_flood",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1010",
+    "policy_id": "POL-5005",
+    "accident_date": "2026-04-30",
+    "accident_description": "Multi-car pileup; front and rear damage.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2025,
+      "make": "Tesla",
+      "model": "Model Y",
+      "trim": "Long Range",
+      "vin": "7SAYGDEE1PF123456",
+      "color": "Midnight Silver"
+    },
+    "reported_date": "2026-04-30",
+    "location": "Chicago, IL",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 5366.12,
+    "scenario_tag": "standard_collision",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1011",
+    "policy_id": "POL-5003",
+    "accident_date": "2026-05-08",
+    "accident_description": "Backing into pole at grocery store.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2023,
+      "make": "Ford",
+      "model": "Escape",
+      "trim": "SE",
+      "vin": "1FMCU9G60PUA12345",
+      "color": "Oxford White"
+    },
+    "reported_date": "2026-05-08",
+    "location": "Miami, FL",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 4995.54,
+    "scenario_tag": "standard_collision",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1012",
+    "policy_id": "POL-5005",
+    "accident_date": "2026-10-01",
+    "accident_description": "Single-vehicle loss after hydroplaning.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2025,
+      "make": "Tesla",
+      "model": "Model Y",
+      "trim": "Long Range",
+      "vin": "7SAYGDEE1PF123456",
+      "color": "Midnight Silver"
+    },
+    "reported_date": "2026-10-01",
+    "location": "Chicago, IL",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 6331.51,
+    "scenario_tag": "standard_collision",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1013",
+    "policy_id": "POL-5002",
+    "accident_date": "2025-12-01",
+    "accident_description": "Vandalism scratches along passenger side.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2021,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "EX",
+      "vin": "19XFC2F59ME123456",
+      "color": "Sonic Gray"
+    },
+    "reported_date": "2025-12-01",
+    "location": "San Jose, CA",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 1339.02,
+    "scenario_tag": "comprehensive_vandalism",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1014",
+    "policy_id": "POL-5001",
+    "accident_date": "2026-02-14",
+    "accident_description": "Intersection T-bone at low speed; door and B-pillar.",
+    "claim_status": "under_investigation",
+    "vehicle": {
+      "year": 2024,
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "XSE",
+      "vin": "JTMB1RFV0R4123456",
+      "color": "Blueprint"
+    },
+    "reported_date": "2026-02-14",
+    "location": "Austin, TX",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 3415.92,
+    "scenario_tag": "standard_collision",
+    "notes": null
+  },
+  {
+    "claim_id": "CLM-1015",
+    "policy_id": "POL-5004",
+    "accident_date": "2025-11-20",
+    "accident_description": "Historical claim while policy was active; used for similarity.",
+    "claim_status": "closed",
+    "vehicle": {
+      "year": 2022,
+      "make": "Subaru",
+      "model": "Outback",
+      "trim": "Premium",
+      "vin": "4S4BTACC2N3123456",
+      "color": "Crystal White"
+    },
+    "reported_date": "2025-11-20",
+    "location": "Buffalo, NY",
+    "police_report_number": null,
+    "submitted_documents": [
+      "FNOL",
+      "Photos",
+      "Repair Estimate"
+    ],
+    "estimate_total": 984.74,
+    "scenario_tag": "historical",
+    "notes": null
+  }
+]

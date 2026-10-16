@@ -1,0 +1,23 @@
+{
+  "collision": [
+    "FNOL",
+    "Police Report",
+    "Repair Estimate",
+    "Photos",
+    "Driver License",
+    "Proof of Ownership"
+  ],
+  "comprehensive": [
+    "FNOL",
+    "Repair Estimate",
+    "Photos",
+    "Driver License",
+    "Proof of Ownership"
+  ],
+  "default": [
+    "FNOL",
+    "Repair Estimate",
+    "Photos",
+    "Driver License"
+  ]
+}

@@ -1,0 +1,1 @@
+"""Hybrid RAG pipeline (BM25 + Pinecone + RRF)."""

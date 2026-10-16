@@ -1,0 +1,170 @@
+[
+  {
+    "id": "EQ-01",
+    "claim_id": "CLM-1001",
+    "question": "Was the policy within its effective date range on the accident date?",
+    "expected_contains": [
+      "within",
+      "effective",
+      "2026-08-15"
+    ]
+  },
+  {
+    "id": "EQ-02",
+    "claim_id": "CLM-1001",
+    "question": "Is collision coverage listed on the policy?",
+    "expected_contains": [
+      "Collision",
+      "listed"
+    ]
+  },
+  {
+    "id": "EQ-03",
+    "claim_id": "CLM-1001",
+    "question": "What is the collision deductible?",
+    "expected_contains": [
+      "500"
+    ]
+  },
+  {
+    "id": "EQ-04",
+    "claim_id": "CLM-1001",
+    "question": "What is the illustrative net repair amount after deductible?",
+    "expected_contains": [
+      "deductible"
+    ]
+  },
+  {
+    "id": "EQ-05",
+    "claim_id": "CLM-1001",
+    "question": "Are required documents missing?",
+    "expected_contains": [
+      "missing"
+    ]
+  },
+  {
+    "id": "EQ-06",
+    "claim_id": "CLM-1002",
+    "question": "Is collision coverage listed?",
+    "expected_contains": [
+      "not listed",
+      "Collision"
+    ]
+  },
+  {
+    "id": "EQ-07",
+    "claim_id": "CLM-1003",
+    "question": "Was the policy active on the loss date?",
+    "expected_contains": [
+      "outside",
+      "expir"
+    ]
+  },
+  {
+    "id": "EQ-08",
+    "claim_id": "CLM-1005",
+    "question": "Are there potentially duplicate repair charges?",
+    "expected_contains": [
+      "duplicate",
+      "ADAS"
+    ]
+  },
+  {
+    "id": "EQ-09",
+    "claim_id": "CLM-1004",
+    "question": "Which coverage type may apply to hail damage?",
+    "expected_contains": [
+      "Comprehensive"
+    ]
+  },
+  {
+    "id": "EQ-10",
+    "claim_id": "CLM-1001",
+    "question": "Which policy exclusions may be relevant to review?",
+    "expected_contains": [
+      "Exclusion"
+    ]
+  },
+  {
+    "id": "EQ-11",
+    "claim_id": "CLM-1001",
+    "question": "What should the adjuster do next?",
+    "expected_contains": [
+      "human",
+      "review"
+    ]
+  },
+  {
+    "id": "EQ-12",
+    "claim_id": "CLM-1005",
+    "question": "What is the submitted repair estimate total?",
+    "expected_contains": [
+      "estimate"
+    ]
+  },
+  {
+    "id": "EQ-13",
+    "claim_id": "CLM-1002",
+    "question": "Which documents are missing for this claim?",
+    "expected_contains": [
+      "missing"
+    ]
+  },
+  {
+    "id": "EQ-14",
+    "claim_id": "CLM-1001",
+    "question": "Find similar historical claims and investigation patterns.",
+    "expected_contains": [
+      "similar"
+    ]
+  },
+  {
+    "id": "EQ-15",
+    "claim_id": "CLM-1001",
+    "question": "Cite the collision coverage clause from the policy.",
+    "expected_contains": [
+      "Section 3",
+      "Collision"
+    ]
+  },
+  {
+    "id": "EQ-16",
+    "claim_id": "CLM-1010",
+    "question": "Validate policy dates for this multi-car claim.",
+    "expected_contains": [
+      "effective"
+    ]
+  },
+  {
+    "id": "EQ-17",
+    "claim_id": "CLM-1008",
+    "question": "Check coverage facts for catalytic converter theft.",
+    "expected_contains": [
+      "Comprehensive"
+    ]
+  },
+  {
+    "id": "EQ-18",
+    "claim_id": "CLM-1001",
+    "question": "What vehicle was involved in CLM-1001?",
+    "expected_contains": [
+      "RAV4"
+    ]
+  },
+  {
+    "id": "EQ-19",
+    "claim_id": "CLM-1003",
+    "question": "List unresolved policy status questions.",
+    "expected_contains": [
+      "expir"
+    ]
+  },
+  {
+    "id": "EQ-20",
+    "claim_id": "CLM-1005",
+    "question": "Produce a full investigation report for human review.",
+    "expected_contains": [
+      "human_review"
+    ]
+  }
+]

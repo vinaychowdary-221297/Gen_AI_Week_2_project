@@ -1,0 +1,74 @@
+[
+  {
+    "clause_id": "CL-01",
+    "title": "Collision definition",
+    "section": "Section 2 \u2014 Definitions",
+    "text": "Collision means the upset of your covered auto or its impact with another vehicle or object."
+  },
+  {
+    "clause_id": "CL-02",
+    "title": "Comprehensive definition",
+    "section": "Section 2 \u2014 Definitions",
+    "text": "Comprehensive means loss caused by other than collision, including fire, theft, vandalism, flood, and glass breakage."
+  },
+  {
+    "clause_id": "CL-03",
+    "title": "Collision payment",
+    "section": "Section 3 \u2014 Collision Coverage",
+    "text": "If Collision is listed in the Declarations, we will pay for direct and accidental loss to your covered auto caused by collision, minus the applicable Collision deductible."
+  },
+  {
+    "clause_id": "CL-04",
+    "title": "Deductible definition",
+    "section": "Section 2 \u2014 Definitions",
+    "text": "Deductible means the amount you must pay before the insurer pays for a covered loss under Collision or Comprehensive."
+  },
+  {
+    "clause_id": "CL-05",
+    "title": "Period of coverage",
+    "section": "Section 2 \u2014 Definitions",
+    "text": "Period of coverage means the time between the Effective Date and Expiration Date shown in the Declarations, inclusive of both dates unless cancelled earlier."
+  },
+  {
+    "clause_id": "CL-06",
+    "title": "Intentional acts exclusion",
+    "section": "Section 6 \u2014 Exclusions",
+    "text": "We do not provide coverage for intentional acts \u2014 damage expected or intended by an insured."
+  },
+  {
+    "clause_id": "CL-07",
+    "title": "Racing exclusion",
+    "section": "Section 6 \u2014 Exclusions",
+    "text": "We do not provide coverage for racing \u2014 use of the auto in any prearranged or organized racing, speed contest, or stunting activity."
+  },
+  {
+    "clause_id": "CL-08",
+    "title": "Business use exclusion",
+    "section": "Section 6 \u2014 Exclusions",
+    "text": "We do not provide coverage for business use of personal auto \u2014 carrying persons or property for a fee, unless rideshare endorsement END-RS-01 is listed."
+  },
+  {
+    "clause_id": "CL-09",
+    "title": "Wear and tear exclusion",
+    "section": "Section 6 \u2014 Exclusions",
+    "text": "We do not provide coverage for wear and tear \u2014 mechanical breakdown, road damage to tires, and ordinary wear."
+  },
+  {
+    "clause_id": "CL-10",
+    "title": "Duties after loss",
+    "section": "Section 7 \u2014 Duties After an Accident or Loss",
+    "text": "You must promptly notify us, cooperate with investigation, submit a police report when required, protect the vehicle, allow inspection, and provide estimates and photos."
+  },
+  {
+    "clause_id": "CL-11",
+    "title": "Rideshare endorsement",
+    "section": "Section 8 \u2014 Endorsements",
+    "text": "END-RS-01 extends liability and physical damage while the insured vehicle is logged into a transportation network platform in a waiting period."
+  },
+  {
+    "clause_id": "CL-12",
+    "title": "Human review requirement",
+    "section": "Section 9 \u2014 Claim Investigation Notes for Adjusters",
+    "text": "Policy-date checks and coverage flags alone do not establish legal coverage. All outcomes require human review."
+  }
+]

@@ -1,0 +1,148 @@
+[
+  {
+    "policy_id": "POL-5001",
+    "insured_name": "Avery Chen",
+    "jurisdiction": "TX",
+    "effective_date": "2026-01-01",
+    "expiration_date": "2027-01-01",
+    "policy_form_version": "PAP-TX-2025.1",
+    "coverages": [
+      "Liability",
+      "Collision",
+      "Comprehensive",
+      "Uninsured Motorist"
+    ],
+    "collision_deductible": 500.0,
+    "comprehensive_deductible": 250.0,
+    "liability_limit_bodily": 100000,
+    "liability_limit_property": 50000,
+    "vehicle": {
+      "year": 2024,
+      "make": "Toyota",
+      "model": "RAV4",
+      "trim": "XSE",
+      "vin": "JTMB1RFV0R4123456",
+      "color": "Blueprint"
+    },
+    "endorsements": [
+      "END-RR-03"
+    ],
+    "status": "active"
+  },
+  {
+    "policy_id": "POL-5002",
+    "insured_name": "Jordan Blake",
+    "jurisdiction": "CA",
+    "effective_date": "2025-06-15",
+    "expiration_date": "2026-06-15",
+    "policy_form_version": "PAP-CA-2025.2",
+    "coverages": [
+      "Liability",
+      "Comprehensive"
+    ],
+    "collision_deductible": 1000.0,
+    "comprehensive_deductible": 500.0,
+    "liability_limit_bodily": 50000,
+    "liability_limit_property": 25000,
+    "vehicle": {
+      "year": 2021,
+      "make": "Honda",
+      "model": "Civic",
+      "trim": "EX",
+      "vin": "19XFC2F59ME123456",
+      "color": "Sonic Gray"
+    },
+    "endorsements": [],
+    "status": "active"
+  },
+  {
+    "policy_id": "POL-5003",
+    "insured_name": "Samira Ortiz",
+    "jurisdiction": "FL",
+    "effective_date": "2026-03-01",
+    "expiration_date": "2027-03-01",
+    "policy_form_version": "PAP-FL-2025.1",
+    "coverages": [
+      "Liability",
+      "Collision",
+      "Comprehensive",
+      "PIP"
+    ],
+    "collision_deductible": 750.0,
+    "comprehensive_deductible": 500.0,
+    "liability_limit_bodily": 100000,
+    "liability_limit_property": 50000,
+    "vehicle": {
+      "year": 2023,
+      "make": "Ford",
+      "model": "Escape",
+      "trim": "SE",
+      "vin": "1FMCU9G60PUA12345",
+      "color": "Oxford White"
+    },
+    "endorsements": [
+      "END-GL-02"
+    ],
+    "status": "active"
+  },
+  {
+    "policy_id": "POL-5004",
+    "insured_name": "Morgan Ellis",
+    "jurisdiction": "NY",
+    "effective_date": "2025-01-01",
+    "expiration_date": "2026-01-01",
+    "policy_form_version": "PAP-NY-2024.4",
+    "coverages": [
+      "Liability",
+      "Collision",
+      "Comprehensive"
+    ],
+    "collision_deductible": 500.0,
+    "comprehensive_deductible": 250.0,
+    "liability_limit_bodily": 100000,
+    "liability_limit_property": 50000,
+    "vehicle": {
+      "year": 2022,
+      "make": "Subaru",
+      "model": "Outback",
+      "trim": "Premium",
+      "vin": "4S4BTACC2N3123456",
+      "color": "Crystal White"
+    },
+    "endorsements": [
+      "END-RS-01"
+    ],
+    "status": "expired"
+  },
+  {
+    "policy_id": "POL-5005",
+    "insured_name": "Riley Nguyen",
+    "jurisdiction": "IL",
+    "effective_date": "2026-02-01",
+    "expiration_date": "2027-02-01",
+    "policy_form_version": "PAP-IL-2025.1",
+    "coverages": [
+      "Liability",
+      "Collision",
+      "Comprehensive",
+      "Roadside"
+    ],
+    "collision_deductible": 1000.0,
+    "comprehensive_deductible": 500.0,
+    "liability_limit_bodily": 250000,
+    "liability_limit_property": 100000,
+    "vehicle": {
+      "year": 2025,
+      "make": "Tesla",
+      "model": "Model Y",
+      "trim": "Long Range",
+      "vin": "7SAYGDEE1PF123456",
+      "color": "Midnight Silver"
+    },
+    "endorsements": [
+      "END-RR-03",
+      "END-GL-02"
+    ],
+    "status": "active"
+  }
+]
