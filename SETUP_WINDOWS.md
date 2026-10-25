@@ -2,9 +2,9 @@
 
 Step-by-step guide for running this app locally on Windows PowerShell.
 
-**No Docker.** External services: **Nebius Token Factory** + **Pinecone** only.
+**No Docker.** External services: **Nebius Token Factory**, **Pinecone**, and **Keenable** (Week 3 web search).
 
-For a short overview, see [README.md](README.md).
+For the Week 3 product overview, see [README.md](README.md).
 
 ---
 
@@ -20,6 +20,7 @@ Install and verify before continuing:
 | Node.js 18+ | `node -v` and `npm -v` |
 | Nebius API key | [Token Factory](https://tokenfactory.nebius.com/) |
 | Pinecone API key | Pinecone console |
+| Keenable API key | [Keenable](https://keenable.ai/) (Week 3 web search) |
 
 Optional: if PowerShell blocks scripts:
 
@@ -79,6 +80,7 @@ Set at least:
 | `NEBIUS_EMBED_MODEL` | Embedding model (example: `Qwen/Qwen3-Embedding-8B`) |
 | `PINECONE_API_KEY` | Your Pinecone key |
 | `PINECONE_INDEX` | Index name, e.g. `claims-intelligence` |
+| `KEENABLE_API_KEY` | Your Keenable key (`keen_...`) for Week 3 web / market research |
 
 Do **not** invent model IDs. Use IDs that appear in your Nebius console or the [model catalog](https://tokenfactory.nebius.com/model-catalog.md).
 

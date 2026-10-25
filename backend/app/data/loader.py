@@ -49,6 +49,16 @@ def load_evaluation_questions() -> List[Dict[str, Any]]:
     return _read_json(DATA_DIR / "evaluation_questions.json")
 
 
+def clear_data_caches() -> None:
+    """Drop JSON loaders so updated claims/line items are picked up without restart."""
+    load_policies.cache_clear()
+    load_claims.cache_clear()
+    load_documents.cache_clear()
+    load_line_items.cache_clear()
+    load_required_docs.cache_clear()
+    load_evaluation_questions.cache_clear()
+
+
 def get_claim(claim_id: str) -> ClaimRecord:
     claims = load_claims()
     if claim_id not in claims:

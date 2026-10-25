@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     pinecone_region: str = Field(default="us-east-1", alias="PINECONE_REGION")
     pinecone_namespace: str = Field(default="policy-docs", alias="PINECONE_NAMESPACE")
 
+    # Keenable (web search)
+    keenable_api_key: str = Field(default="", alias="KEENABLE_API_KEY")
+    keenable_max_results: int = Field(default=5, alias="KEENABLE_MAX_RESULTS")
+    keenable_search_mode: str = Field(default="pro", alias="KEENABLE_SEARCH_MODE")
+    keenable_market_line_limit: int = Field(default=5, alias="KEENABLE_MARKET_LINE_LIMIT")
+
     # Hybrid RAG
     rrf_k: int = Field(default=60, alias="RRF_K")
     top_k_bm25: int = Field(default=8, alias="TOP_K_BM25")
@@ -50,9 +56,13 @@ class Settings(BaseSettings):
     chunk_overlap: int = Field(default=120, alias="CHUNK_OVERLAP")
     enable_rerank: bool = Field(default=False, alias="ENABLE_RERANK")
 
-    # Agent
-    max_tool_calls: int = Field(default=12, alias="MAX_TOOL_CALLS")
-    agent_timeout_seconds: int = Field(default=120, alias="AGENT_TIMEOUT_SECONDS")
+    # Agent (comprehensive runs need more steps: weather + market + estimates)
+    max_tool_calls: int = Field(default=28, alias="MAX_TOOL_CALLS")
+    agent_timeout_seconds: int = Field(default=300, alias="AGENT_TIMEOUT_SECONDS")
+    max_tool_retries: int = Field(default=1, alias="MAX_TOOL_RETRIES")
+    max_consecutive_tool_failures: int = Field(
+        default=2, alias="MAX_CONSECUTIVE_TOOL_FAILURES"
+    )
 
     # Server
     host: str = Field(default="127.0.0.1", alias="HOST")

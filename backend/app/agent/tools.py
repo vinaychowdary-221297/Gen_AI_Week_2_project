@@ -11,6 +11,7 @@ from decimal import Decimal, ROUND_HALF_UP
 from typing import Any, Callable, Dict, List, Optional
 
 from app.data.loader import (
+    clear_data_caches,
     get_claim,
     get_claim_documents,
     get_line_items,
@@ -23,6 +24,12 @@ from app.data.models import coerce_citation_dict, normalize_retrieved_evidence
 from app.events.bus import event_bus
 from app.rag.hybrid import hybrid_search
 
+from app.agent.week3_tools import (
+    WEEK3_IMPLEMENTATIONS,
+    WEEK3_SCHEMAS,
+    WEEK3_TOOL_NODE_MAP,
+)
+
 TOOL_NODE_MAP = {
     "get_claim_details": "claim_lookup",
     "search_policy_documents": "hybrid_retrieval",
@@ -33,6 +40,16 @@ TOOL_NODE_MAP = {
     "find_similar_claims": "similar_claims",
     "query_portfolio_data": "portfolio_lookup",
     "generate_investigation_report": "report_generator",
+    **WEEK3_TOOL_NODE_MAP,
+}
+
+# Tools that get one automatic retry on transient failure
+RETRYABLE_TOOLS = {
+    "search_web",
+    "research_market_repair_costs",
+    "build_illustrative_market_estimate",
+    "build_preliminary_estimate",
+    "search_policy_documents",
 }
 
 
@@ -182,22 +199,47 @@ def analyze_repair_estimate(claim_id: str, run_id: Optional[str] = None) -> Dict
             )
 
     submitted_total = _money(claim.estimate_total)
+    facility_total = computed_total
+    # Prefer parsed facility markdown grand total when present
+    try:
+        from app.agent.estimate_docs import load_estimate_document
+
+        facility_doc = load_estimate_document(claim_id, "facility")
+        if facility_doc.get("grand_total") is not None:
+            facility_total = _money(facility_doc["grand_total"])
+    except Exception:  # noqa: BLE001
+        facility_doc = None
+
+    delta_facility_minus_submitted = _money(facility_total - submitted_total)
     deductible = _money(policy.collision_deductible)
-    illustrative_net = submitted_total - deductible
+    if "comprehensive" in (claim.scenario_tag or "").lower():
+        deductible = _money(policy.comprehensive_deductible)
+    illustrative_net = facility_total - deductible
     if illustrative_net < Decimal("0.00"):
         illustrative_net = Decimal("0.00")
+
+    mismatch_notes: List[str] = []
+    if submitted_total != facility_total:
+        mismatch_notes.append(
+            f"submitted_total ({submitted_total}) differs from facility/line total "
+            f"({facility_total}) by {delta_facility_minus_submitted}. "
+            "Use facility/line totals for shop figures; do not invent a different delta."
+        )
 
     return {
         "claim_id": claim_id,
         "repair_line_items": line_rows,
         "submitted_total": float(submitted_total),
         "sum_of_line_items": float(computed_total),
+        "facility_estimate_total": float(facility_total),
+        "delta_facility_minus_submitted": float(delta_facility_minus_submitted),
         "potential_duplicate_charges": potential_duplicates,
-        "arithmetic_inconsistencies": arithmetic_issues,
+        "arithmetic_inconsistencies": arithmetic_issues + mismatch_notes,
         "illustrative_net_amount": float(illustrative_net),
         "illustrative_deductible_applied": float(deductible),
         "notes": [
             "Arithmetic is computed with Decimal precision in code, not by an LLM.",
+            "When quoting totals or differences, copy delta_facility_minus_submitted exactly — never recalculate in prose.",
             "Potential duplicates are flagged only; charges are not removed automatically.",
             "Illustrative net amount is not a settlement offer.",
         ],
@@ -374,6 +416,66 @@ def _as_plain_str_list(value: Any) -> List[str]:
     return [str(value)]
 
 
+def _money_str(value: float | Decimal) -> str:
+    return f"${float(value):,.2f}"
+
+
+_MONEY_DOT = "\u2024"  # one-dot leader — placeholder so "$1,322.50" is not a sentence end
+
+
+def _protect_money_decimals(text: str) -> str:
+    return re.sub(
+        r"\$[\d,]+(?:\.\d+)?",
+        lambda m: m.group(0).replace(".", _MONEY_DOT),
+        text,
+    )
+
+
+def _restore_money_decimals(text: str) -> str:
+    return text.replace(_MONEY_DOT, ".")
+
+
+def _scrub_claim_summary_math(summary: str, verified: Dict[str, Any]) -> str:
+    """Remove LLM-invented estimate comparisons; append code-verified figures."""
+    text = _protect_money_decimals((summary or "").strip())
+    # Drop any sentence that talks about estimate $ / submitted / net / deductible math
+    money_sentence_re = re.compile(
+        r"(?i)[^.?!]*(?:"
+        r"facility\s+estimate|submitted\s+total|sum\s+of\s+line|"
+        r"illustrative\s+net|after\s+applying\s+the\s+deductible|"
+        r"less\s+than\s+the\s+submitted|more\s+than\s+the\s+submitted"
+        r")[^.?!]*[.?!]?"
+    )
+    text = money_sentence_re.sub(" ", text)
+    text = _restore_money_decimals(re.sub(r"\s{2,}", " ", text).strip(" ;,"))
+
+    fac = verified.get("facility_estimate_total")
+    sub = verified.get("submitted_total")
+    delta = verified.get("delta_facility_minus_submitted")
+    ded = verified.get("illustrative_deductible_applied")
+    net = verified.get("illustrative_net_amount")
+    if fac is None:
+        return text
+
+    if abs(float(delta or 0)) < 0.005:
+        money_sentence = (
+            f"The facility estimate totals {_money_str(fac)} "
+            f"(matches submitted/line total). After the {_money_str(ded)} deductible, "
+            f"the illustrative net is {_money_str(net)} pending human review — not a settlement."
+        )
+    else:
+        direction = "more than" if float(delta) > 0 else "less than"
+        money_sentence = (
+            f"The facility estimate totals {_money_str(fac)}, which is "
+            f"{_money_str(abs(float(delta)))} {direction} the submitted total of {_money_str(sub)}. "
+            f"After the {_money_str(ded)} deductible, the illustrative net is {_money_str(net)} "
+            f"pending human review — not a settlement."
+        )
+    if text and not text.endswith((".", "!", "?")):
+        text += "."
+    return f"{text} {money_sentence}".strip() if text else money_sentence
+
+
 def generate_investigation_report(
     claim_id: str,
     claim_summary: str = "",
@@ -404,19 +506,53 @@ def generate_investigation_report(
             }
         ]
     needs_human = True if human_review_required is None else bool(human_review_required)
+
+    summary = claim_summary or f"Investigation summary for {claim_id}"
+    ea = estimate_analysis if isinstance(estimate_analysis, dict) else {}
+    fin = illustrative_financials if isinstance(illustrative_financials, dict) else {}
+
+    # Always overwrite estimate $ with Decimal tool math (LLM prose invents deltas).
+    if claim_id and str(claim_id).lower() not in {"portfolio", "none", "null", ""}:
+        try:
+            clear_data_caches()
+            verified = analyze_repair_estimate(str(claim_id), run_id=run_id)
+            ea = {
+                **ea,
+                "claim_id": verified["claim_id"],
+                "submitted_total": verified["submitted_total"],
+                "sum_of_line_items": verified["sum_of_line_items"],
+                "facility_estimate_total": verified["facility_estimate_total"],
+                "delta_facility_minus_submitted": verified["delta_facility_minus_submitted"],
+                "arithmetic_inconsistencies": verified.get("arithmetic_inconsistencies") or [],
+                "potential_duplicate_charges": verified.get("potential_duplicate_charges") or [],
+                "source": "analyze_repair_estimate (code, Decimal)",
+            }
+            fin = {
+                "submitted_total": verified["submitted_total"],
+                "facility_estimate_total": verified["facility_estimate_total"],
+                "delta_facility_minus_submitted": verified["delta_facility_minus_submitted"],
+                "illustrative_deductible_applied": verified["illustrative_deductible_applied"],
+                "illustrative_net_amount": verified["illustrative_net_amount"],
+                "note": (
+                    "Computed in code with Decimal precision. Illustrative only — "
+                    "not a settlement, payment, or approval."
+                ),
+            }
+            summary = _scrub_claim_summary_math(summary, verified)
+        except Exception:  # noqa: BLE001
+            pass
+
     return {
         "claim_id": str(claim_id or "unknown"),
         "investigation_status": investigation_status or "pending_human_review",
-        "claim_summary": claim_summary or f"Investigation summary for {claim_id}",
+        "claim_summary": summary,
         "policy_facts": policy_facts if isinstance(policy_facts, dict) else {},
         "retrieved_evidence": evidence,
         "coverage_considerations": _as_plain_str_list(coverage_considerations),
-        "estimate_analysis": estimate_analysis if isinstance(estimate_analysis, dict) else {},
+        "estimate_analysis": ea,
         "potential_discrepancies": _as_plain_str_list(potential_discrepancies),
         "missing_documents": _as_plain_str_list(missing_documents),
-        "illustrative_financials": (
-            illustrative_financials if isinstance(illustrative_financials, dict) else {}
-        ),
+        "illustrative_financials": fin,
         "recommended_next_steps": _as_plain_str_list(recommended_next_steps)
         or [
             "Have a licensed adjuster review all evidence and tool outputs.",
@@ -429,7 +565,7 @@ def generate_investigation_report(
             "settle, or pay any claim. Final decisions require licensed human review. "
             "Policy-date checks and coverage flags alone do not establish legal coverage."
         ),
-        "report_builder": "v5_plain_dict",
+        "report_builder": "v6_verified_financials",
     }
 
 
@@ -634,6 +770,8 @@ TOOL_SCHEMAS: List[Dict[str, Any]] = [
     },
 ]
 
+TOOL_SCHEMAS.extend(WEEK3_SCHEMAS)
+
 
 IMPLEMENTATIONS: Dict[str, Callable[..., Dict[str, Any]]] = {
     "get_claim_details": get_claim_details,
@@ -645,6 +783,7 @@ IMPLEMENTATIONS: Dict[str, Callable[..., Dict[str, Any]]] = {
     "find_similar_claims": find_similar_claims,
     "query_portfolio_data": query_portfolio_data,
     "generate_investigation_report": generate_investigation_report,
+    **WEEK3_IMPLEMENTATIONS,
 }
 
 

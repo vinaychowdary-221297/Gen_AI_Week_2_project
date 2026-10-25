@@ -69,6 +69,22 @@ export default function BottomPanel({ logs, report, question }: Props) {
 
         {tab === "report" && report && (
           <div className="space-y-4 text-slate-300">
+            {(report.investigation_status === "awaiting_human" ||
+              report.human_review_required) && (
+              <div className="rounded border border-accent-amber/40 bg-accent-amber/10 p-3 text-accent-amber">
+                <div className="font-semibold text-white">Awaiting human adjuster</div>
+                <p className="mt-1 text-slate-300">
+                  Autonomous processing ended. No approval, denial, settlement, or payment was made.
+                </p>
+                {report.unresolved_questions?.length ? (
+                  <ul className="mt-2 list-disc pl-5 text-slate-300">
+                    {report.unresolved_questions.map((q, i) => (
+                      <li key={i}>{q}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            )}
             <section>
               {question ? (
                 <>

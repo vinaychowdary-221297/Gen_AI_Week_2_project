@@ -33,9 +33,9 @@ export default function AnimatedEdge({
   const feedback = Boolean(d.feedback);
 
   // Idle paths stay readable on the dark canvas; active/traversed are brighter
-  let stroke = "#94a3b8";
-  let strokeWidth = 2;
-  let opacity = 0.85;
+  let stroke = "#cbd5e1";
+  let strokeWidth = 2.25;
+  let opacity = 0.95;
 
   if (active) {
     stroke = feedback ? "#c4b5fd" : "#22d3ee";

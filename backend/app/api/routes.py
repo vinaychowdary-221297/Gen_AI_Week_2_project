@@ -13,6 +13,7 @@ from sse_starlette.sse import EventSourceResponse
 from app.agent.graph import run_investigation
 from app.clients.nebius import get_nebius
 from app.clients.pinecone_client import get_pinecone_store
+from app.clients.keenable import get_keenable
 from app.config import get_settings
 from app.data.loader import (
     claim_summary,
@@ -32,6 +33,7 @@ async def health() -> Dict[str, Any]:
     settings = get_settings()
     nebius_status = {"ok": False, "error": "not checked"}
     pinecone_status = {"ok": False, "error": "not checked"}
+    keenable_status = {"ok": False, "error": "not checked"}
     bm25_ok = False
     try:
         if settings.nebius_api_key and not settings.nebius_api_key.startswith("your_"):
@@ -44,6 +46,10 @@ async def health() -> Dict[str, Any]:
     except Exception as exc:  # noqa: BLE001
         pinecone_status = {"ok": False, "error": str(exc)}
     try:
+        keenable_status = get_keenable().health_check()
+    except Exception as exc:  # noqa: BLE001
+        keenable_status = {"ok": False, "error": str(exc)}
+    try:
         bm25_ok = bool(get_bm25_store().chunks)
     except Exception:  # noqa: BLE001
         bm25_ok = False
@@ -54,13 +60,15 @@ async def health() -> Dict[str, Any]:
         "backend": {"ok": backend_ok},
         "nebius": nebius_status,
         "pinecone": pinecone_status,
+        "keenable": keenable_status,
         "bm25": {"ok": bm25_ok, "chunks": len(get_bm25_store().chunks) if bm25_ok else 0},
         "models": {
             "chat": settings.nebius_chat_model,
             "embed": settings.nebius_embed_model,
         },
+        "agent_architecture": "single_agent_staged_claim_process",
         "report_builder": "v5_plain_dict",
-        "code_stamp": "source-alias-fix-20261015",
+        "code_stamp": "week3-keenable-20261023",
     }
 
 
@@ -96,10 +104,12 @@ async def example_questions(claim_id: Optional[str] = None) -> List[str]:
         "Which policy IDs are expired?",
     ]
     claim_qs = [
+        "Run the full claim process from filing through report for human review.",
         "Was the policy within its effective date range on the accident date?",
         "Is collision coverage listed? What is the deductible?",
-        "Which policy clauses may apply, and are there relevant exclusions?",
-        "Analyze the repair estimate for duplicates and compute illustrative net amount.",
+        "Compare preliminary vs facility repair estimates — what changed at the shop?",
+        "Research market parts/labor costs for this estimate using web search (illustrative only).",
+        "Is there public weather context relevant to this loss? Search the web and cite sources.",
         "Are required documents missing? What should the adjuster request next?",
         "Find similar claims and produce a full investigation report for human review.",
     ]
@@ -184,11 +194,17 @@ async def workflow_nodes() -> List[Dict[str, Any]]:
     """Static architecture node catalog for the React Flow canvas."""
     return [
         {"id": "start_trigger", "label": "Start Trigger", "icon": "play", "group": "flow"},
+        {"id": "stage_filing", "label": "Stage: Filing", "icon": "file-text", "group": "stages"},
+        {"id": "stage_classification", "label": "Stage: Classification", "icon": "tags", "group": "stages"},
+        {"id": "stage_investigation", "label": "Stage: Investigation", "icon": "search", "group": "stages"},
+        {"id": "stage_report", "label": "Stage: Report", "icon": "file-check", "group": "stages"},
         {"id": "claim_intake", "label": "Claim Intake", "icon": "file-text", "group": "intake"},
         {"id": "langgraph_agent", "label": "LangGraph Agent", "icon": "brain", "group": "agent"},
         {"id": "nebius_llm", "label": "Nebius LLM", "icon": "sparkles", "group": "agent"},
         {"id": "claim_lookup", "label": "Claim Lookup", "icon": "search", "group": "tools"},
         {"id": "claim_database", "label": "Claim Database", "icon": "database", "group": "tools"},
+        {"id": "classification", "label": "Classify Claim", "icon": "tags", "group": "tools"},
+        {"id": "claim_documents", "label": "Claim Documents", "icon": "folder", "group": "tools"},
         {"id": "portfolio_lookup", "label": "Portfolio Lookup", "icon": "database", "group": "tools"},
         {"id": "hybrid_retrieval", "label": "Hybrid Retrieval", "icon": "git-merge", "group": "rag"},
         {"id": "bm25_search", "label": "BM25 Search", "icon": "search", "group": "rag"},
@@ -197,8 +213,16 @@ async def workflow_nodes() -> List[Dict[str, Any]]:
         {"id": "rrf_fusion", "label": "RRF Fusion", "icon": "merge", "group": "rag"},
         {"id": "coverage_check", "label": "Coverage Check", "icon": "shield-check", "group": "tools"},
         {"id": "estimate_analysis", "label": "Estimate Analysis", "icon": "calculator", "group": "tools"},
+        {"id": "estimate_parse", "label": "Parse Estimate Doc", "icon": "file-text", "group": "tools"},
+        {"id": "preliminary_estimate", "label": "Preliminary Estimate", "icon": "calculator", "group": "tools"},
+        {"id": "estimate_compare", "label": "Compare Estimates", "icon": "git-compare", "group": "tools"},
+        {"id": "web_search", "label": "Web Search (Keenable)", "icon": "globe", "group": "tools"},
+        {"id": "market_research", "label": "Market Cost Research", "icon": "globe", "group": "tools"},
+        {"id": "market_estimate", "label": "Market Estimate", "icon": "calculator", "group": "tools"},
+        {"id": "tool_retry", "label": "Tool Retry", "icon": "refresh", "group": "flow"},
         {"id": "missing_documents", "label": "Missing Documents", "icon": "folder-search", "group": "tools"},
         {"id": "similar_claims", "label": "Similar Claims", "icon": "files", "group": "tools"},
         {"id": "report_generator", "label": "Output Report Generator", "icon": "file-check", "group": "output"},
+        {"id": "human_handoff", "label": "Human Handoff", "icon": "user-check", "group": "output"},
         {"id": "human_review", "label": "Human Review", "icon": "user-check", "group": "output"},
     ]

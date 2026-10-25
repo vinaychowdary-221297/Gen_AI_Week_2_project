@@ -33,6 +33,28 @@ const edgeTypes = { animated: AnimatedEdge };
 
 const NODE_SCALE_KEY = "claims-intel-node-scale-v1";
 
+function buildEdges(
+  activeEdgeIds: string[] = [],
+  traversedEdgeIds: string[] = []
+) {
+  const activeSet = new Set(activeEdgeIds);
+  const traversedSet = new Set(traversedEdgeIds);
+  return defaultEdges.map((e) => {
+    const active = activeSet.has(e.id);
+    const traversed = traversedSet.has(e.id) && !active;
+    return {
+      ...e,
+      data: { ...(e.data || {}), active, traversed },
+      markerEnd: {
+        type: MarkerType.ArrowClosed,
+        color: active ? "#22d3ee" : traversed ? "#38bdf8" : "#cbd5e1",
+        width: active ? 20 : 18,
+        height: active ? 20 : 18,
+      },
+    };
+  });
+}
+
 interface Props {
   nodeState: Record<string, NodeExecution>;
   selectedNodeId: string | null;
@@ -42,6 +64,8 @@ interface Props {
   activeEdgeIds?: string[];
   /** Edge ids already used on this run (static highlight). */
   traversedEdgeIds?: string[];
+  /** Hide minimap / heavy toolbar — nodes + edges only. */
+  minimal?: boolean;
 }
 
 function loadNodeScale(): number {
@@ -168,18 +192,12 @@ function CanvasInner({
   resetKey,
   activeEdgeIds = [],
   traversedEdgeIds = [],
+  minimal = false,
 }: Props) {
   const [nodes, setNodes, onNodesChange] = useNodesState(loadNodes());
-  const [edges, setEdges, onEdgesChange] = useEdgesState(
-    defaultEdges.map((e) => ({
-      ...e,
-      markerEnd: { type: MarkerType.ArrowClosed, color: "#94a3b8", width: 18, height: 18 },
-    }))
-  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(buildEdges());
   const [nodeScale, setNodeScale] = useState(loadNodeScale);
   const { fitView } = useReactFlow();
-  const activeSet = useMemo(() => new Set(activeEdgeIds), [activeEdgeIds]);
-  const traversedSet = useMemo(() => new Set(traversedEdgeIds), [traversedEdgeIds]);
 
   const applyNodeScale = useCallback((value: number) => {
     const next = Math.min(2, Math.max(0.6, value));
@@ -187,13 +205,19 @@ function CanvasInner({
     localStorage.setItem(NODE_SCALE_KEY, String(next));
   }, []);
 
+  // Always rebuild the full edge list so new Week-3 links appear after HMR / reset
+  useEffect(() => {
+    setEdges(buildEdges(activeEdgeIds, traversedEdgeIds));
+  }, [activeEdgeIds, traversedEdgeIds, setEdges, resetKey]);
+
   useEffect(() => {
     if (resetKey > 0) {
       setNodes(resetPositions());
+      setEdges(buildEdges());
       applyNodeScale(1);
       setTimeout(() => fitView({ padding: 0.15 }), 50);
     }
-  }, [resetKey, setNodes, fitView, applyNodeScale]);
+  }, [resetKey, setNodes, setEdges, fitView, applyNodeScale]);
 
   useEffect(() => {
     setNodes((nds) =>
@@ -207,24 +231,7 @@ function CanvasInner({
         };
       })
     );
-
-    setEdges((eds) =>
-      eds.map((e) => {
-        const active = activeSet.has(e.id);
-        const traversed = traversedSet.has(e.id);
-        return {
-          ...e,
-          data: { ...(e.data || {}), active, traversed },
-          markerEnd: {
-            type: MarkerType.ArrowClosed,
-            color: active ? "#22d3ee" : traversed ? "#38bdf8" : "#94a3b8",
-            width: active ? 20 : 18,
-            height: active ? 20 : 18,
-          },
-        };
-      })
-    );
-  }, [nodeState, selectedNodeId, nodeScale, activeSet, traversedSet, setNodes, setEdges]);
+  }, [nodeState, selectedNodeId, nodeScale, setNodes]);
 
   const onNodeClick = useCallback(
     (_event: React.MouseEvent, node: Node) => onSelectNode(node.id),
@@ -268,21 +275,26 @@ function CanvasInner({
           size={1}
           color="rgba(148,163,184,0.25)"
         />
-        <Controls showInteractive={false} className="!border-white/10 !bg-navy-800 !shadow-lg" />
-        <MiniMap
-          nodeColor={miniColors}
-          maskColor="rgba(7,11,22,0.75)"
-          className="!border-white/10 !bg-navy-900"
-        />
-        <CanvasToolbar
-          nodeScale={nodeScale}
-          onNodeScale={applyNodeScale}
-          onResetLayout={() => {
-            setNodes(resetPositions());
-            applyNodeScale(1);
-            setTimeout(() => fitView({ padding: 0.15 }), 50);
-          }}
-        />
+        {!minimal && (
+          <>
+            <Controls showInteractive={false} className="!border-white/10 !bg-navy-800 !shadow-lg" />
+            <MiniMap
+              nodeColor={miniColors}
+              maskColor="rgba(7,11,22,0.75)"
+              className="!border-white/10 !bg-navy-900"
+            />
+            <CanvasToolbar
+              nodeScale={nodeScale}
+              onNodeScale={applyNodeScale}
+              onResetLayout={() => {
+                setNodes(resetPositions());
+                setEdges(buildEdges());
+                applyNodeScale(1);
+                setTimeout(() => fitView({ padding: 0.15 }), 50);
+              }}
+            />
+          </>
+        )}
       </ReactFlow>
     </div>
   );

@@ -68,6 +68,7 @@ class ClaimRecord(BaseModel):
     estimate_total: float = 0.0
     scenario_tag: Optional[str] = None
     notes: Optional[str] = None
+    vehicle_at_facility: bool = False
 
 
 class Citation(BaseModel):

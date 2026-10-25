@@ -1,7 +1,17 @@
-import { useCallback, useRef, useState } from "react";
+import {
+  createContext,
+  createElement,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { api, eventsUrl } from "../lib/api";
 import { edgesForNodeStart } from "../lib/pathEdges";
 import type { InvestigationReport, NodeExecution, NodeStatus, WorkflowEvent } from "../types";
+import type { ProcessStage } from "../components/ProcessPipeline";
 
 function mapStatus(eventType: string, status: string): NodeStatus | null {
   if (eventType === "node_started" || eventType === "tool_called" || eventType === "retrieval_started") {
@@ -11,7 +21,9 @@ function mapStatus(eventType: string, status: string): NodeStatus | null {
     eventType === "node_completed" ||
     eventType === "tool_result" ||
     eventType === "retrieval_completed" ||
-    eventType === "report_generated"
+    eventType === "report_generated" ||
+    eventType === "handoff_requested" ||
+    eventType === "stage_changed"
   ) {
     return "completed";
   }
@@ -24,17 +36,67 @@ function mapStatus(eventType: string, status: string): NodeStatus | null {
   return null;
 }
 
-export function useInvestigation() {
+function stageFromEvent(ev: WorkflowEvent): ProcessStage | null {
+  if (ev.event_type === "stage_changed" && ev.input_summary && typeof ev.input_summary === "object") {
+    const s = (ev.input_summary as { stage?: string }).stage;
+    if (
+      s === "filing" ||
+      s === "classification" ||
+      s === "investigation" ||
+      s === "report" ||
+      s === "human_review"
+    ) {
+      return s;
+    }
+  }
+  if (ev.event_type === "handoff_requested") return "human_review";
+  if (ev.node_id?.startsWith("stage_")) {
+    const s = ev.node_id.replace("stage_", "");
+    if (
+      s === "filing" ||
+      s === "classification" ||
+      s === "investigation" ||
+      s === "report" ||
+      s === "human_review"
+    ) {
+      return s;
+    }
+  }
+  return null;
+}
+
+export type InvestigationApi = {
+  running: boolean;
+  runId: string | null;
+  logs: WorkflowEvent[];
+  nodeState: Record<string, NodeExecution>;
+  report: InvestigationReport | null;
+  error: string | null;
+  currentStage: ProcessStage;
+  handoff: boolean;
+  activeEdgeIds: string[];
+  traversedEdgeIds: string[];
+  claimId: string | null;
+  question: string | null;
+  start: (claimId: string | null | undefined, question: string) => Promise<void>;
+  reset: () => void;
+};
+
+const InvestigationContext = createContext<InvestigationApi | null>(null);
+
+function useInvestigationState(): InvestigationApi {
   const [running, setRunning] = useState(false);
   const [runId, setRunId] = useState<string | null>(null);
   const [logs, setLogs] = useState<WorkflowEvent[]>([]);
   const [nodeState, setNodeState] = useState<Record<string, NodeExecution>>({});
   const [report, setReport] = useState<InvestigationReport | null>(null);
   const [error, setError] = useState<string | null>(null);
-  /** Edges currently flowing (particles). */
+  const [currentStage, setCurrentStage] = useState<ProcessStage>(null);
+  const [handoff, setHandoff] = useState(false);
   const [activeEdgeIds, setActiveEdgeIds] = useState<string[]>([]);
-  /** Edges that were used on this run (static highlight, no motion). */
   const [traversedEdgeIds, setTraversedEdgeIds] = useState<string[]>([]);
+  const [claimId, setClaimId] = useState<string | null>(null);
+  const [question, setQuestion] = useState<string | null>(null);
   const sourceRef = useRef<EventSource | null>(null);
   const lastEventId = useRef<string | undefined>(undefined);
   const visitedRef = useRef<Set<string>>(new Set());
@@ -48,8 +110,12 @@ export function useInvestigation() {
     setReport(null);
     setError(null);
     setRunId(null);
+    setCurrentStage(null);
+    setHandoff(false);
     setActiveEdgeIds([]);
     setTraversedEdgeIds([]);
+    setClaimId(null);
+    setQuestion(null);
     lastEventId.current = undefined;
     visitedRef.current = new Set();
     activeEdgesRef.current = [];
@@ -63,7 +129,6 @@ export function useInvestigation() {
     if (ev.node_id) {
       const nextStatus = mapStatus(ev.event_type, ev.status);
 
-      // Path-aware arrows: only animate edges into the node that just started
       if (
         (ev.event_type === "node_started" ||
           ev.event_type === "tool_called" ||
@@ -73,7 +138,6 @@ export function useInvestigation() {
         const incoming = edgesForNodeStart(ev.node_id, visitedRef.current);
         visitedRef.current.add(ev.node_id);
 
-        // Previous flowing edges become traversed (path already taken)
         if (activeEdgesRef.current.length) {
           const finished = [...activeEdgesRef.current];
           setTraversedEdgeIds((prev) => Array.from(new Set([...prev, ...finished])));
@@ -90,8 +154,6 @@ export function useInvestigation() {
         ev.node_id
       ) {
         visitedRef.current.add(ev.node_id);
-        // Keep particles until the *next* hop starts; when node completes,
-        // mark its inbound edges as traversed but clear active if they match
         const inbound = edgesForNodeStart(ev.node_id, visitedRef.current);
         setTraversedEdgeIds((prev) => Array.from(new Set([...prev, ...inbound])));
       }
@@ -115,14 +177,38 @@ export function useInvestigation() {
       });
     }
 
+    const stage = stageFromEvent(ev);
+    if (stage) setCurrentStage(stage);
+
     if (ev.event_type === "report_generated" && ev.output_summary) {
       setReport(ev.output_summary as InvestigationReport);
+      setCurrentStage((prev) => prev || "report");
     }
-    if (ev.event_type === "workflow_completed") {
-      // Clear flowing particles; keep traversed path visible
+    if (ev.event_type === "handoff_requested") {
+      setHandoff(true);
+      setCurrentStage("human_review");
       activeEdgesRef.current = [];
       setActiveEdgeIds([]);
       setRunning(false);
+      if (ev.run_id) {
+        api
+          .run(ev.run_id)
+          .then((r) => {
+            if (r.report) setReport(r.report);
+          })
+          .catch(() => undefined);
+      }
+    }
+    if (ev.event_type === "workflow_completed") {
+      activeEdgesRef.current = [];
+      setActiveEdgeIds([]);
+      setRunning(false);
+      if (ev.status === "awaiting_human") {
+        setHandoff(true);
+        setCurrentStage("human_review");
+      } else {
+        setCurrentStage("human_review");
+      }
       if (ev.run_id) {
         api
           .run(ev.run_id)
@@ -166,6 +252,9 @@ export function useInvestigation() {
         "retrieval_started",
         "retrieval_completed",
         "report_generated",
+        "handoff_requested",
+        "stage_changed",
+        "tool_retry",
         "workflow_completed",
         "workflow_failed",
         "heartbeat",
@@ -180,11 +269,13 @@ export function useInvestigation() {
   );
 
   const start = useCallback(
-    async (claimId: string | null | undefined, question: string) => {
+    async (nextClaimId: string | null | undefined, nextQuestion: string) => {
       reset();
+      setClaimId(nextClaimId || null);
+      setQuestion(nextQuestion);
       setRunning(true);
       try {
-        const res = await api.investigate(claimId, question);
+        const res = await api.investigate(nextClaimId, nextQuestion);
         setRunId(res.run_id);
         subscribe(res.run_id);
       } catch (err) {
@@ -195,16 +286,51 @@ export function useInvestigation() {
     [reset, subscribe]
   );
 
-  return {
-    running,
-    runId,
-    logs,
-    nodeState,
-    report,
-    error,
-    activeEdgeIds,
-    traversedEdgeIds,
-    start,
-    reset,
-  };
+  return useMemo(
+    () => ({
+      running,
+      runId,
+      logs,
+      nodeState,
+      report,
+      error,
+      currentStage,
+      handoff,
+      activeEdgeIds,
+      traversedEdgeIds,
+      claimId,
+      question,
+      start,
+      reset,
+    }),
+    [
+      running,
+      runId,
+      logs,
+      nodeState,
+      report,
+      error,
+      currentStage,
+      handoff,
+      activeEdgeIds,
+      traversedEdgeIds,
+      claimId,
+      question,
+      start,
+      reset,
+    ]
+  );
+}
+
+export function InvestigationProvider({ children }: { children: ReactNode }) {
+  const value = useInvestigationState();
+  return createElement(InvestigationContext.Provider, { value }, children);
+}
+
+export function useInvestigation(): InvestigationApi {
+  const ctx = useContext(InvestigationContext);
+  if (!ctx) {
+    throw new Error("useInvestigation must be used within InvestigationProvider");
+  }
+  return ctx;
 }

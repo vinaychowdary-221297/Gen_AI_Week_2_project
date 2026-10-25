@@ -15,6 +15,12 @@ ROOT = Path(__file__).resolve().parent.parent / "data"
 POLICIES_DIR = ROOT / "policies"
 CLAIMS_DIR = ROOT / "claims"
 
+# Import estimate markdown helper (package path when run via uv from backend/)
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from app.agent.estimate_docs import format_estimate_markdown  # noqa: E402
+
 
 def ensure_dirs() -> None:
     POLICIES_DIR.mkdir(parents=True, exist_ok=True)
@@ -279,6 +285,7 @@ def build_claims(policies: list) -> list:
             "estimate_total": 4820.50,
             "scenario_tag": "standard_collision",
             "notes": "Demo scenario: active policy, collision listed, complete docs.",
+            "vehicle_at_facility": True,
         },
         {
             "claim_id": "CLM-1002",
@@ -294,6 +301,7 @@ def build_claims(policies: list) -> list:
             "estimate_total": 2150.00,
             "scenario_tag": "no_collision_coverage",
             "notes": "Collision not listed on policy; comprehensive only.",
+            "vehicle_at_facility": True,
         },
         {
             "claim_id": "CLM-1003",
@@ -309,6 +317,7 @@ def build_claims(policies: list) -> list:
             "estimate_total": 3600.00,
             "scenario_tag": "policy_expired",
             "notes": "Loss date after policy expiration.",
+            "vehicle_at_facility": False,
         },
         {
             "claim_id": "CLM-1004",
@@ -324,6 +333,7 @@ def build_claims(policies: list) -> list:
             "estimate_total": 5400.00,
             "scenario_tag": "comprehensive_hail",
             "notes": "Comprehensive claim; collision not implicated.",
+            "vehicle_at_facility": True,
         },
         {
             "claim_id": "CLM-1005",
@@ -339,6 +349,7 @@ def build_claims(policies: list) -> list:
             "estimate_total": 8750.25,
             "scenario_tag": "duplicate_line_items",
             "notes": "Estimate contains potential duplicate ADAS calibration charge.",
+            "vehicle_at_facility": True,
         },
     ]
 
@@ -378,9 +389,64 @@ def build_claims(policies: list) -> list:
                 "estimate_total": round(random.uniform(800, 7000), 2),
                 "scenario_tag": tag,
                 "notes": None,
+                "vehicle_at_facility": tag != "historical",
             }
         )
     return claims
+
+
+def write_claim_estimate_files(claims: list, line_items: list) -> None:
+    """Write preliminary + facility estimate Markdown under data/claims/{id}/."""
+    by_claim: dict = {}
+    for li in line_items:
+        by_claim.setdefault(li["claim_id"], []).append(li)
+
+    for claim in claims:
+        cid = claim["claim_id"]
+        folder = CLAIMS_DIR / cid
+        folder.mkdir(parents=True, exist_ok=True)
+        v = claim["vehicle"]
+        vehicle = f"{v['year']} {v['make']} {v['model']}"
+        vin = v.get("vin") or "N/A"
+        facility_items = by_claim.get(cid, [])
+        # Preliminary = fewer / cheaper lines (desk estimate before tear-down)
+        prelim_items = facility_items[: max(1, len(facility_items) // 2)] or facility_items
+        if cid == "CLM-1001" and len(facility_items) > 3:
+            prelim_items = facility_items[:3]
+
+        prelim_md = format_estimate_markdown(
+            claim_id=cid,
+            title="Preliminary Desk Estimate",
+            shop_name="Insurer desk review (photos / FNOL)",
+            vehicle=vehicle,
+            vin=vin,
+            location=claim["location"],
+            line_items=prelim_items,
+            note=(
+                "Based on information on file. May change after vehicle inspection "
+                "at a repair facility. Not a settlement offer."
+            ),
+        )
+        facility_md = format_estimate_markdown(
+            claim_id=cid,
+            title="Repair Facility Estimate",
+            shop_name="Partner body shop (after vehicle intake)",
+            vehicle=vehicle,
+            vin=vin,
+            location=claim["location"],
+            line_items=facility_items,
+            note=(
+                "Shop estimate after vehicle at facility. Supplements and ADAS lines "
+                "may appear after tear-down. Human review required."
+            ),
+        )
+        (folder / "Preliminary_Estimate.md").write_text(prelim_md, encoding="utf-8")
+        (folder / "Repair_Facility_Estimate.md").write_text(facility_md, encoding="utf-8")
+        # Lightweight FNOL stub for document checklist demos
+        (folder / "FNOL.md").write_text(
+            f"# FNOL {cid}\n\n{claim['accident_description']}\n",
+            encoding="utf-8",
+        )
 
 
 def build_documents(claims: list) -> list:
@@ -734,6 +800,13 @@ def main() -> None:
     claims = build_claims(policies)
     documents = build_documents(claims)
     line_items = build_line_items(claims)
+    # Keep claim.estimate_total aligned with facility line-item sums (source of truth)
+    sums: dict = {}
+    for li in line_items:
+        sums[li["claim_id"]] = round(sums.get(li["claim_id"], 0.0) + float(li["total"]), 2)
+    for claim in claims:
+        if claim["claim_id"] in sums:
+            claim["estimate_total"] = sums[claim["claim_id"]]
     checklist = build_required_docs_checklist()
     eval_qs = build_evaluation_questions()
 
@@ -748,6 +821,8 @@ def main() -> None:
     for p in policies:
         path = POLICIES_DIR / f"{p['policy_id']}.md"
         path.write_text(policy_markdown(p), encoding="utf-8")
+
+    write_claim_estimate_files(claims, line_items)
 
     # CSV export for line items
     csv_path = ROOT / "repair_line_items.csv"

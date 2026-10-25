@@ -26,8 +26,10 @@ export default function ClaimSidebar({
   return (
     <aside className="scrollbar-thin flex h-full flex-col gap-3 overflow-auto rounded-xl border border-white/10 bg-navy-900/80 p-4">
       <div>
-        <h3 className="font-display text-sm font-semibold">Claim Investigation</h3>
-        <p className="mt-1 text-xs text-slate-400">Select a claim and run the agentic hybrid RAG workflow.</p>
+        <h3 className="font-display text-sm font-semibold">Claim Process Agent</h3>
+        <p className="mt-1 text-xs text-slate-400">
+          Filing → classify → investigate (RAG + estimates + web) → report → human review.
+        </p>
       </div>
 
       <label className="block text-xs text-slate-400">
@@ -82,12 +84,30 @@ export default function ClaimSidebar({
         />
       </label>
 
+      {selectedClaimId ? (
+        <button
+          type="button"
+          onClick={() =>
+            onQuestionChange(
+              "Run the full claim process from filing through report for human review."
+            )
+          }
+          className="rounded-lg border border-accent-cyan/40 bg-accent-cyan/10 px-3 py-2 text-xs font-medium text-accent-cyan hover:bg-accent-cyan/20"
+        >
+          Load full claim process prompt
+        </button>
+      ) : null}
+
       <button
         onClick={onRun}
         disabled={running || !question.trim()}
         className="rounded-lg bg-gradient-to-r from-accent-blue to-accent-violet px-4 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {running ? "Investigating…" : selectedClaimId ? "Run Investigation" : "Ask Portfolio Question"}
+        {running
+          ? "Running…"
+          : selectedClaimId
+            ? "Run Claim Process / Investigation"
+            : "Ask Portfolio Question"}
       </button>
 
       <div>

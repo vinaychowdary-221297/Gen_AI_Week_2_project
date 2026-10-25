@@ -40,8 +40,10 @@ export interface HealthStatus {
   backend: { ok: boolean };
   nebius: { ok: boolean; error?: string; chat_model?: string; embed_model?: string };
   pinecone: { ok: boolean; error?: string; exists?: boolean; ready?: boolean };
+  keenable?: { ok: boolean; error?: string; configured?: boolean };
   bm25: { ok: boolean; chunks: number };
   models: { chat: string; embed: string };
+  agent_architecture?: string;
 }
 
 export interface WorkflowEvent {

@@ -1,6 +1,6 @@
 import type { Edge, Node } from "@xyflow/react";
 
-const STORAGE_KEY = "claims-intel-workflow-positions-v4";
+const STORAGE_KEY = "claims-intel-workflow-positions-v5";
 
 export type WorkflowNodeData = {
   label: string;
@@ -91,9 +91,51 @@ const defaultNodes: Node<WorkflowNodeData>[] = [
     type: "iconNode",
   },
   {
+    id: "classification",
+    position: { x: 660, y: -40 },
+    data: { label: "Classify Claim", icon: "tags", accent: "#c084fc", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "claim_documents",
+    position: { x: 860, y: 100 },
+    data: { label: "Claim Documents", icon: "folder", accent: "#67e8f9", status: "idle" },
+    type: "iconNode",
+  },
+  {
     id: "estimate_analysis",
     position: { x: 660, y: 460 },
     data: { label: "Estimate Analysis", icon: "calculator", accent: "#f59e0b", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "preliminary_estimate",
+    position: { x: 880, y: 460 },
+    data: { label: "Preliminary Estimate", icon: "calculator", accent: "#fbbf24", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "estimate_parse",
+    position: { x: 880, y: 560 },
+    data: { label: "Parse Facility Est.", icon: "file-text", accent: "#f59e0b", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "estimate_compare",
+    position: { x: 1100, y: 510 },
+    data: { label: "Compare Estimates", icon: "git-compare", accent: "#fb923c", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "web_search",
+    position: { x: 880, y: 680 },
+    data: { label: "Web Search (Keenable)", icon: "globe", accent: "#2dd4bf", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "market_research",
+    position: { x: 1100, y: 680 },
+    data: { label: "Market Cost Research", icon: "globe", accent: "#14b8a6", status: "idle" },
     type: "iconNode",
   },
   {
@@ -106,6 +148,12 @@ const defaultNodes: Node<WorkflowNodeData>[] = [
     id: "similar_claims",
     position: { x: 660, y: 700 },
     data: { label: "Similar Claims", icon: "files", accent: "#38bdf8", status: "idle" },
+    type: "iconNode",
+  },
+  {
+    id: "human_handoff",
+    position: { x: 1220, y: 300 },
+    data: { label: "Human Handoff", icon: "user-check", accent: "#f97316", status: "idle" },
     type: "iconNode",
   },
   {
@@ -138,10 +186,19 @@ export const defaultEdges: Edge[] = [
   { id: "e12", source: "rrf_fusion", target: "langgraph_agent", type: "animated", data: { active: false, feedback: true } },
   { id: "e13", source: "langgraph_agent", target: "coverage_check", type: "animated", data: { active: false } },
   { id: "e14", source: "langgraph_agent", target: "estimate_analysis", type: "animated", data: { active: false } },
+  { id: "e14b", source: "langgraph_agent", target: "classification", type: "animated", data: { active: false } },
+  { id: "e14c", source: "langgraph_agent", target: "claim_documents", type: "animated", data: { active: false } },
+  { id: "e14d", source: "langgraph_agent", target: "preliminary_estimate", type: "animated", data: { active: false } },
+  { id: "e14e", source: "langgraph_agent", target: "estimate_parse", type: "animated", data: { active: false } },
+  { id: "e14f", source: "langgraph_agent", target: "estimate_compare", type: "animated", data: { active: false } },
+  { id: "e14g", source: "langgraph_agent", target: "web_search", type: "animated", data: { active: false } },
+  { id: "e14h", source: "langgraph_agent", target: "market_research", type: "animated", data: { active: false } },
+  { id: "e14i", source: "langgraph_agent", target: "human_handoff", type: "animated", data: { active: false } },
   { id: "e15", source: "langgraph_agent", target: "missing_documents", type: "animated", data: { active: false } },
   { id: "e16", source: "langgraph_agent", target: "similar_claims", type: "animated", data: { active: false } },
   { id: "e17", source: "langgraph_agent", target: "report_generator", type: "animated", data: { active: false } },
   { id: "e18", source: "report_generator", target: "human_review", type: "animated", data: { active: false } },
+  { id: "e19", source: "human_handoff", target: "human_review", type: "animated", data: { active: false } },
 ];
 
 export function loadNodes(): Node<WorkflowNodeData>[] {

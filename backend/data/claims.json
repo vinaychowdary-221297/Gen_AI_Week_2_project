@@ -23,9 +23,10 @@
       "Photos",
       "Driver License"
     ],
-    "estimate_total": 4820.5,
+    "estimate_total": 1843.0,
     "scenario_tag": "standard_collision",
-    "notes": "Demo scenario: active policy, collision listed, complete docs."
+    "notes": "Demo scenario: active policy, collision listed, complete docs.",
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1002",
@@ -49,9 +50,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 2150.0,
+    "estimate_total": 2030.5,
     "scenario_tag": "no_collision_coverage",
-    "notes": "Collision not listed on policy; comprehensive only."
+    "notes": "Collision not listed on policy; comprehensive only.",
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1003",
@@ -75,9 +77,10 @@
       "Police Report",
       "Repair Estimate"
     ],
-    "estimate_total": 3600.0,
+    "estimate_total": 1783.0,
     "scenario_tag": "policy_expired",
-    "notes": "Loss date after policy expiration."
+    "notes": "Loss date after policy expiration.",
+    "vehicle_at_facility": false
   },
   {
     "claim_id": "CLM-1004",
@@ -102,9 +105,10 @@
       "Repair Estimate",
       "Weather Report"
     ],
-    "estimate_total": 5400.0,
+    "estimate_total": 1428.0,
     "scenario_tag": "comprehensive_hail",
-    "notes": "Comprehensive claim; collision not implicated."
+    "notes": "Comprehensive claim; collision not implicated.",
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1005",
@@ -129,9 +133,10 @@
       "Repair Estimate",
       "Photos"
     ],
-    "estimate_total": 8750.25,
+    "estimate_total": 3157.5,
     "scenario_tag": "duplicate_line_items",
-    "notes": "Estimate contains potential duplicate ADAS calibration charge."
+    "notes": "Estimate contains potential duplicate ADAS calibration charge.",
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1006",
@@ -155,9 +160,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 4764.45,
+    "estimate_total": 2158.0,
     "scenario_tag": "standard_collision",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1007",
@@ -181,9 +187,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 955.07,
+    "estimate_total": 1142.5,
     "scenario_tag": "glass",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1008",
@@ -207,9 +214,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 2505.18,
+    "estimate_total": 550.0,
     "scenario_tag": "comprehensive_theft",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1009",
@@ -233,9 +241,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 2183.91,
+    "estimate_total": 1433.0,
     "scenario_tag": "comprehensive_flood",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1010",
@@ -259,9 +268,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 5366.12,
+    "estimate_total": 693.0,
     "scenario_tag": "standard_collision",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1011",
@@ -285,9 +295,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 4995.54,
+    "estimate_total": 1937.5,
     "scenario_tag": "standard_collision",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1012",
@@ -311,9 +322,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 6331.51,
+    "estimate_total": 965.0,
     "scenario_tag": "standard_collision",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1013",
@@ -337,9 +349,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 1339.02,
+    "estimate_total": 1322.5,
     "scenario_tag": "comprehensive_vandalism",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1014",
@@ -363,9 +376,10 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 3415.92,
+    "estimate_total": 2375.5,
     "scenario_tag": "standard_collision",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": true
   },
   {
     "claim_id": "CLM-1015",
@@ -389,8 +403,9 @@
       "Photos",
       "Repair Estimate"
     ],
-    "estimate_total": 984.74,
+    "estimate_total": 1500.0,
     "scenario_tag": "historical",
-    "notes": null
+    "notes": null,
+    "vehicle_at_facility": false
   }
 ]

@@ -27,11 +27,13 @@ export default function TopNav({ health }: Props) {
           <h1 className="font-display text-lg font-semibold tracking-tight text-white">
             Insurance Claims Intelligence
           </h1>
-          <p className="text-xs text-slate-400">Agentic Hybrid RAG Investigation Platform</p>
+          <p className="text-xs text-slate-400">
+            Week 3 · Filing → Classify → Investigate → Report → Human Review · Keenable web search
+          </p>
         </div>
         <nav className="flex flex-wrap items-center gap-1">
           <NavLink to="/" className={linkClass} end>
-            Dashboard
+            Adjuster Desk
           </NavLink>
           <NavLink to="/workflow" className={linkClass}>
             Live Workflow
@@ -50,6 +52,7 @@ export default function TopNav({ health }: Props) {
           <Dot ok={!!health?.backend?.ok} label="Backend" />
           <Dot ok={!!health?.nebius?.ok} label="Nebius" />
           <Dot ok={!!health?.pinecone?.ok} label="Pinecone" />
+          <Dot ok={!!health?.keenable?.ok} label="Keenable" />
           <Dot ok={!!health?.bm25?.ok} label="BM25" />
         </div>
       </div>

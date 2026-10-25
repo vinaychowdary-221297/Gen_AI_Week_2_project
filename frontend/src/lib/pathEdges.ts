@@ -17,10 +17,18 @@ export const INCOMING_EDGES: Record<string, string[]> = {
   rrf_fusion: ["e10", "e11"],
   coverage_check: ["e13"],
   estimate_analysis: ["e14"],
+  classification: ["e14b"],
+  claim_documents: ["e14c"],
+  preliminary_estimate: ["e14d"],
+  estimate_parse: ["e14e"],
+  estimate_compare: ["e14f"],
+  web_search: ["e14g"],
+  market_research: ["e14h"],
+  human_handoff: ["e14i"],
   missing_documents: ["e15"],
   similar_claims: ["e16"],
   report_generator: ["e17"],
-  human_review: ["e18"],
+  human_review: ["e18", "e19"],
 };
 
 /** Prefer these sources when a node has multiple possible inbound edges. */
@@ -40,10 +48,19 @@ const EDGE_SOURCE: Record<string, string> = {
   e12: "rrf_fusion",
   e13: "langgraph_agent",
   e14: "langgraph_agent",
+  e14b: "langgraph_agent",
+  e14c: "langgraph_agent",
+  e14d: "langgraph_agent",
+  e14e: "langgraph_agent",
+  e14f: "langgraph_agent",
+  e14g: "langgraph_agent",
+  e14h: "langgraph_agent",
+  e14i: "langgraph_agent",
   e15: "langgraph_agent",
   e16: "langgraph_agent",
   e17: "langgraph_agent",
   e18: "report_generator",
+  e19: "human_handoff",
 };
 
 export function edgesForNodeStart(
