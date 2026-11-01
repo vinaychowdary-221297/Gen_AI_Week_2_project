@@ -24,11 +24,13 @@ def main() -> None:
 
     doc.add_heading("Insurance Claims Intelligence — Project Report", 0)
     p = doc.add_paragraph()
-    p.add_run("Week 2 (Agentic Hybrid RAG) + Week 3 (Single-Agent Claim Process)").italic = True
+    p.add_run(
+        "Week 2 (Agentic Hybrid RAG) · Week 3 (Single-Agent Claim Process) · "
+        "Week 4 (Own Use-Case Evaluation)"
+    ).italic = True
     doc.add_paragraph(
-        "This report summarizes what was built, which datasets power the demo, how prompts "
-        "evolved during iterative (“vibe”) coding, the main iterations tried, and learnings "
-        "from the workflow."
+        "This report summarizes what was built across Weeks 2–4, which datasets power the demo, "
+        "how prompts evolved during iterative (“vibe”) coding, evaluation results, and learnings."
     )
 
     # ----- Overview -----
@@ -95,6 +97,7 @@ def main() -> None:
             "15 claim folders with FNOL.md, Preliminary_Estimate.md, Repair_Facility_Estimate.md",
             "Required-document checklists (required_documents.json)",
             "~20 evaluation questions (evaluation_questions.json)",
+            "Week 4 golden set: 40 labeled cases (week4_golden_cases.json) + scored CSV under docs/week4/",
             "Policy clause library snippets used in generation / RAG corpus",
             "BM25 index under data/indexes/ after ingest; Pinecone namespace for dense chunks",
         ],
@@ -130,6 +133,7 @@ def main() -> None:
             "Every comprehensive run must search weather / required web info.",
             "Fix recursion limit / wrong estimate math in summaries; clarify illustrative financials vs market research.",
             "Create architecture doc and short demo recording scripts (Week 3 clips only).",
+            "Week 4: evaluate the Week 3 agent with a 40-case golden set; live baseline then improved scores; spreadsheet submission.",
         ],
     )
 
@@ -194,7 +198,18 @@ def main() -> None:
         ],
     )
 
-    doc.add_heading("4.3 Iteration that did not stick", 2)
+    doc.add_heading("4.3 Week 4 evaluation iterations", 2)
+    add_bullets(
+        doc,
+        [
+            "Built a 40-case golden set (happy / edge / known-failure / adversarial) and a spreadsheet rubric.",
+            "Live baseline via run_investigation: 33/40 PASS (82.5%) — dominant fail: auto-handoff after RAG/web soft failures.",
+            "Fixes: SOFT_FAIL_TOOLS (continue after search/RAG errors); coverage-first prompts; compare_estimate_versions for deltas; sanitized adversarial handoffs.",
+            "Live improved: 40/40 PASS (100%); +7 fixed cases; 0 regressions; p95 latency ~15s.",
+        ],
+    )
+
+    doc.add_heading("4.4 Iteration that did not stick", 2)
     add_bullets(
         doc,
         [
@@ -202,6 +217,7 @@ def main() -> None:
             "Tavily integration — replaced by Keenable before shipping.",
             "Heavy Live Workflow chrome (sidebar, bottom logs, minimap) — removed so the canvas stays a debug view.",
             "Trusting LLM prose for dollar comparisons — replaced with code verification.",
+            "Weak/tools-only Week 4 scoring — replaced with live agent runs for the submission spreadsheet.",
         ],
     )
 
@@ -217,8 +233,10 @@ def main() -> None:
             "Adjuster-facing UI and engineer debug UI should share state but not the same layout; splitting Desk vs Workflow improved demos.",
             "Synthetic data drifts (estimate_total vs line sums) silently poison demos — generate_data should keep them aligned.",
             "External search (Keenable) needs health checks, retries, and a no-invention rule when search fails.",
+            "Auto-handoff on every network failure is too aggressive — soft-fail + structured fallbacks recovered seven eval cases.",
             "Human boundary language must be repeated in prompts, report disclaimer, and UI — otherwise audiences assume the agent “pays” the claim.",
             "Vibe coding works well for vertical slices (tool → API → canvas node → desk panel) with frequent demo runs; documentation (README, architecture, demo scripts) needs to be rewritten when files get wiped or scope shifts.",
+            "Week 4: identical case IDs for baseline vs improved are non-negotiable; score the real agent, not a tool oracle, for the own-use-case track.",
         ],
     )
 
@@ -238,10 +256,13 @@ def main() -> None:
     add_bullets(
         doc,
         [
-            "README.md — setup and Week 3 product overview",
+            "README.md — Weeks 2–4 overview and setup",
             "docs/ARCHITECTURE.md — system diagrams and component map",
             "docs/WEEK3_AGENTIC.md — Week 3 stages, tools, demo claims",
-            "docs/WEEK3_DEMO_SCRIPTS.docx — short recording clips for Week 3 only",
+            "docs/WEEK4_EVAL.md — Week 4 evaluation report (Markdown)",
+            "docs/WEEK4_PROJECT_REPORT.docx — Week 4 evaluation solution doc",
+            "docs/WEEK3_DEMO_SCRIPTS.docx / docs/WEEK4_DEMO_SCRIPTS.docx — Loom scripts",
+            "docs/week4/week4_eval_results.csv — scored golden set",
             "SETUP_WINDOWS.md — Windows troubleshooting",
         ],
     )

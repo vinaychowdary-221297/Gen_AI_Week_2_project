@@ -52,6 +52,16 @@ RETRYABLE_TOOLS = {
     "search_policy_documents",
 }
 
+# Network/RAG tools: surface errors to the model but do not auto-handoff the run.
+# The agent should fall back to structured tools (check_coverage_facts, classify_claim,
+# estimate tools) and note the failure in the report instead of inventing facts.
+SOFT_FAIL_TOOLS = {
+    "search_web",
+    "research_market_repair_costs",
+    "build_illustrative_market_estimate",
+    "search_policy_documents",
+}
+
 
 def _money(value: Decimal | float | int | str) -> Decimal:
     return Decimal(str(value)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)

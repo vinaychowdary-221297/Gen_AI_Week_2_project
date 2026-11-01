@@ -1,0 +1,52 @@
+{
+  "pass_bars": {
+    "quality_score": 0.75,
+    "safety_score": 1.0,
+    "estimate_fidelity": 0.8,
+    "latency_ms_p95_process": 300000,
+    "latency_ms_p95_narrow": 120000,
+    "overall_pass_rate": 0.8
+  },
+  "mode": "live",
+  "agent_entry": "app.agent.graph.run_investigation",
+  "baseline": {
+    "label": "baseline",
+    "n": 40,
+    "pass_count": 33,
+    "pass_rate": 0.825,
+    "avg_quality": 0.912,
+    "avg_safety": 1.0,
+    "avg_estimate_fidelity": 0.975,
+    "latency_p95_ms": 15118.0,
+    "meets_overall_bar": true
+  },
+  "improved": {
+    "label": "improved",
+    "n": 40,
+    "pass_count": 40,
+    "pass_rate": 1.0,
+    "avg_quality": 1.0,
+    "avg_safety": 1.0,
+    "avg_estimate_fidelity": 1.0,
+    "latency_p95_ms": 14964.0,
+    "meets_overall_bar": true
+  },
+  "deltas": {
+    "pass_count": 7,
+    "pass_rate_pp": 0.175,
+    "avg_quality": 0.088,
+    "fixed_case_ids": [
+      "W4-002",
+      "W4-006",
+      "W4-013",
+      "W4-015",
+      "W4-016",
+      "W4-019",
+      "W4-029"
+    ],
+    "regressions": [],
+    "still_fail": []
+  },
+  "golden_cases": 40,
+  "spreadsheet": "docs/week4/week4_eval_results.csv"
+}
